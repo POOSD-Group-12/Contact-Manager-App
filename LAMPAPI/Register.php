@@ -2,10 +2,10 @@
 
 	$inData = getRequestInfo();
 	
-	$id = 0;
-	$firstName = "";
-	$lastName = "";
- 
+  $LastName = $inData["LastName"];
+  $FirstName = $inData["FirstName"];
+	$Login = $inData["Login"];
+  $Password = = $inData["Password"];
 
   // Code below is a placeholder and needs the username password and name of database.
 	$conn = new mysqli("localhost", "TheBeast", "011ee91355156a86cc8ae431e11014966cb21fa05d43c89c", "COP4331");
@@ -15,22 +15,13 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
-		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
+   
+		$stmt = $conn->prepare("Insert into User (LastName, FirstName, Login, Password) VALUES(?,?)");
+		$stmt->bind_param("ssss", $LastName, $FirstName, $Login, $Password);
 		$stmt->execute();
-		$result = $stmt->get_result();
-
-		if( $row = $result->fetch_assoc()  )
-		{
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
-		}
-		else
-		{
-			returnWithError("No Records Found");
-		}
-
 		$stmt->close();
 		$conn->close();
+		returnWithError("");
 	}
 	
 	function getRequestInfo()
@@ -46,13 +37,13 @@
 	
 	function returnWithError( $err )
 	{
-		$retValue = '{"id":0,"firstName":"","lastName":"", "error":"' . $err . '"}';
+		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
-	function returnWithInfo( $firstName, $lastName, $id )
+	function returnWithInfo( $FirstName, $LastName, $Login, $Password, $id )
 	{
-		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+		$retValue = '{"id":' . $id . ',"firstName":"' . $FirstName . '","lastName":"' . $LastName . '","login":"' . $Login . '","password":"' . $Password . '" ,"error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
