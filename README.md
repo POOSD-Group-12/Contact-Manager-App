@@ -9,6 +9,8 @@ when coding on the branch make sure you are doing these following commands every
 [getting started with github](https://www.freecodecamp.org/news/the-beginners-guide-to-git-github/)
 
 `git checkout main & pull`    : this checks the version of main and syncs the version from github to yours
+
 `git checkout <your branch>`  : this switches to your branch
+
 `git pull origin main`        : this pulls down the changes in main to your current branch preventing merge conflicts later down the line
 
