@@ -64,7 +64,7 @@ body
     height: 30px;
     margin-left: 40%;
     border: none;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Trebuchet MS';
 }
 
 .buttons:hover{
@@ -114,7 +114,7 @@ input[type="text"],input[type="password"]{
     text-align: center;
     margin-left: 5%;
     margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Trebuchet MS';
     color: #000000;
 }
 
@@ -169,4 +169,5 @@ select{
 {
     font-size: 15px;
     text-align: center;
+    font-family: 'Trebuchet MS';
 }
