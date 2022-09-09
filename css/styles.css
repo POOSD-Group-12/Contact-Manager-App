@@ -58,26 +58,36 @@ body
 
 .buttons
 {
-    font-size: 30px;
-    border-radius: 25px;
-    width: 50%;
-    margin-left: 25%;
+    font-size: 15px;
+    border-radius: 2px;
+    width: 20%;
+    height: 30px;
+    margin-left: 40%;
+    border: none;
     font-family: 'Ubuntu', sans-serif;
 }
 
 .buttons:hover{
-    background-color: #00d5124f;
-    color: #FFFFFF;
-    opacity: 50%;
+    background-color: #1709ac4f;
+    color: #000000;
+    opacity: 80%;
 }
 
 #loginName
 {
-	font-size: 30px;
+	font-size: 15px;
+    border: none;
+    height: 30px;
+    margin-left: 25%;
+    width: 50%;
 }
 #loginPassword
 {
-	font-size: 30px;
+	font-size: 15px;
+    border: none;
+    height: 30px;
+    margin-left: 25%;
+    width: 50%;
 }
 #searchText
 {
@@ -99,7 +109,7 @@ input[type="text"],input[type="password"]{
 
 #inner-title{
     display: inline-block;
-    font-size: 0.8em;
+    font-size: 0.7em;
     width: 90%;
     text-align: center;
     margin-left: 5%;
@@ -153,4 +163,10 @@ select{
     margin-bottom: 1%;
     font-family: 'Ubuntu', sans-serif;
     color: #95060a;
+}
+
+#signupClick
+{
+    font-size: 15px;
+    text-align: center;
 }
