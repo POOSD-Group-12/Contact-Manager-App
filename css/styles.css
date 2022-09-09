@@ -1,25 +1,41 @@
 body 
 {
-    background-color: #707070;
+    background-color: #170b36;
 }
 
 #title 
 {
     font-size: 40px;
-    width: 100%;
+    width: 90%;
+    margin: 2% 5%;
+    margin-top: 6%;
+    text-align: center;
+    font-family: 'Trebuchet MS';
+    letter-spacing: 7px;
+    transform: scale(1.2, 1);
+    color: #FFFFFF;
+}
+
+#motto
+{
+    font-size: 15px;
+    width: 90%;
     margin: 2% 5%;
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
+    font-style: italic;
     color: #FFFFFF;
 }
 
 #loginDiv
 {
     font-size: 30px;
-    width: 70%;
+    width: 65%;
     margin-left: 15%;
+    margin-top: 3%;
     padding: 25px;
-    background-color: #b2b2b2;
+    background-color: #caccfd;
+    border-radius: 25px;
 }
 
 #loggedInDiv
@@ -42,26 +58,36 @@ body
 
 .buttons
 {
-    font-size: 30px;
-    border-radius: 25px;
-    width: 50%;
-    margin-left: 25%;
-    font-family: 'Ubuntu', sans-serif;
+    font-size: 15px;
+    border-radius: 2px;
+    width: 20%;
+    height: 30px;
+    margin-left: 40%;
+    border: none;
+    font-family: 'Trebuchet MS';
 }
 
 .buttons:hover{
-    background-color: #00d5124f;
-    color: #FFFFFF;
-    opacity: 50%;
+    background-color: #1709ac4f;
+    color: #000000;
+    opacity: 80%;
 }
 
 #loginName
 {
-	font-size: 30px;
+	font-size: 15px;
+    border: none;
+    height: 30px;
+    margin-left: 25%;
+    width: 50%;
 }
 #loginPassword
 {
-	font-size: 30px;
+	font-size: 15px;
+    border: none;
+    height: 30px;
+    margin-left: 25%;
+    width: 50%;
 }
 #searchText
 {
@@ -83,13 +109,13 @@ input[type="text"],input[type="password"]{
 
 #inner-title{
     display: inline-block;
-    font-size: 0.8em;
+    font-size: 0.7em;
     width: 90%;
     text-align: center;
     margin-left: 5%;
     margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
+    font-family: 'Trebuchet MS';
+    color: #000000;
 }
 
 #loginResult{
@@ -137,4 +163,11 @@ select{
     margin-bottom: 1%;
     font-family: 'Ubuntu', sans-serif;
     color: #95060a;
+}
+
+#signupClick
+{
+    font-size: 15px;
+    text-align: center;
+    font-family: 'Trebuchet MS';
 }
