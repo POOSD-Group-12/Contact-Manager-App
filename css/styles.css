@@ -1,6 +1,6 @@
 body 
 {
-    background-color: #170b36;
+    background-color: #ffffff;
 }
 
 #title 
@@ -13,7 +13,7 @@ body
     font-family: 'Trebuchet MS';
     letter-spacing: 7px;
     transform: scale(1.2, 1);
-    color: #FFFFFF;
+    color: #000000;
 }
 
 #motto
@@ -24,7 +24,7 @@ body
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
     font-style: italic;
-    color: #FFFFFF;
+    color: #000000;
 }
 
 #loginDiv
@@ -34,7 +34,7 @@ body
     margin-left: 15%;
     margin-top: 3%;
     padding: 25px;
-    background-color: #caccfd;
+    background-color: #ffffff;
     border-radius: 25px;
 }
 
@@ -60,33 +60,73 @@ body
 {
     font-size: 15px;
     border-radius: 2px;
-    width: 20%;
-    height: 30px;
-    margin-left: 40%;
+    width: 50%;
+    height: 40px;
+    margin-left: 25%;
     border: none;
     font-family: 'Trebuchet MS';
+    background-color: #000000;
+    color: #ffffff;
 }
 
 .buttons:hover{
-    background-color: #1709ac4f;
+    background-color: #0022ff4f;
     color: #000000;
-    opacity: 80%;
+    opacity: 100%;
 }
 
 #loginName
 {
 	font-size: 15px;
-    border: none;
-    height: 30px;
+    border-radius: 2px;
+    height: 40px;
     margin-left: 25%;
+    border-color: #000000;
     width: 50%;
 }
 #loginPassword
 {
 	font-size: 15px;
-    border: none;
-    height: 30px;
+    border-radius: 2px;
+    height: 40px;
     margin-left: 25%;
+    border-color: #000000;
+    width: 50%;
+}
+#registerFirstName
+{
+	font-size: 15px;
+    border-radius: 2px;
+    height: 40px;
+    margin-left: 25%;
+    border-color: #000000;
+    width: 50%;
+}
+#registerLastName
+{
+	font-size: 15px;
+    border-radius: 2px;
+    height: 40px;
+    margin-left: 25%;
+    border-color: #000000;
+    width: 50%;
+}
+#registerName
+{
+	font-size: 15px;
+    border-radius: 2px;
+    height: 40px;
+    margin-left: 25%;
+    border-color: #000000;
+    width: 50%;
+}
+#registerPassword
+{
+	font-size: 15px;
+    border-radius: 2px;
+    height: 40px;
+    margin-left: 25%;
+    border-color: #000000;
     width: 50%;
 }
 #searchText
@@ -110,9 +150,9 @@ input[type="text"],input[type="password"]{
 #inner-title{
     display: inline-block;
     font-size: 0.7em;
-    width: 90%;
+    width: 58%;
     text-align: center;
-    margin-left: 5%;
+    margin-left: 0%;
     margin-bottom: 2%;
     font-family: 'Trebuchet MS';
     color: #000000;
@@ -170,4 +210,15 @@ select{
     font-size: 15px;
     text-align: center;
     font-family: 'Trebuchet MS';
+}
+
+#registerDiv
+{
+    font-size: 30px;
+    width: 65%;
+    margin-left: 15%;
+    margin-top: 3%;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 25px;
 }
