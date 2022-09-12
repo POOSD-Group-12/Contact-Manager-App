@@ -5,16 +5,16 @@
 	$searchResults = "";
 	$searchCount = 0;
 
-	$conn = new mysqli("localhost", "TheBeast", "011ee91355156a86cc8ae431e11014966cb21fa05d43c89c", "COP4331");
+	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select * from Contacts where (FirstName like ? OR LastName like ?) and UserID=?");
-		$colorName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ssi", $colorName, $colorName, $inData["userId"]);
+		$stmt = $conn->prepare("select * from Contacts where (FirstName like ? or LastName like ?) and UserID = ?");
+		$input = "%" . $inData["Search"] . "%";
+		$stmt->bind_param("sss", $input, $input, $inData["UserID"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
@@ -26,8 +26,7 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			//$searchResults .= '"' . $row["Firstname"] . '"';
-      $searchResults .= '{"FirstName" : "'. $row["FirstName"] . '", "LastName" : "'. $row["LastName"] . '", "Email" : "'. $row["Email"] . '", "Phone" : "'. $row["Phone"] . '", "UserID" : "'. $row["UserID"] . '"  }';
+			$searchResults .= '{"UserID" : "' . $row["UserID"] . '", "FirstName" : "' . $row["FirstName"] . '", "LastName" : "' . $row["LastName"] . '", "Phone" : "' . $row["Phone"] . '", "Email" : "' . $row["Email"] . '" }';
 		}
 		
 		if( $searchCount == 0 )
