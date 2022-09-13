@@ -150,15 +150,25 @@ input[type="text"],input[type="password"]{
 #inner-title{
     display: inline-block;
     font-size: 0.7em;
-    width: 58%;
     text-align: center;
-    margin-left: 0%;
+    margin-left: 25%;
     margin-bottom: 2%;
     font-family: 'Trebuchet MS';
     color: #000000;
 }
 
 #loginResult{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #95060a;
+}
+
+#registerResult{
     display: inline-block;
     font-size: 0.8em;
     width: 90%;
@@ -187,22 +197,6 @@ select{
     margin-top: 2%;
     font-size: 0.75em;
     font-family: 'Ubuntu', sans-serif;
-}
-
-#colorSearchResult{
-    display: none;
-}
-
-#colorAddResult{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: 2%;
-    margin-bottom: 1%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
 }
 
 #signupClick
