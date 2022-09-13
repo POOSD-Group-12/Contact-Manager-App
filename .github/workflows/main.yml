@@ -12,8 +12,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+  
       #- name: Run Super-Linter
       #  uses: github/super-linter@v3
-
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy-app
+        uses: appleboy/ssh-action@v0.12
+        with:
+          host: ${{secrets.SSH_HOST))
+          key: ${{secrets.SSH_KEY}}
+          username: ${{secrets.SSH_USERNAME}}
+          
+        run: |
+          cd /var/www/html/
+          git clone git@github.com:POOSD-Group-12/Contact-Manager-App.git .
 
