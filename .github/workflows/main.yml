@@ -24,8 +24,8 @@ jobs:
           host: ${{secrets.SSH_HOST))
           key: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
-          
-        run: |
-          cd /var/www/html/
-          git clone git@github.com:POOSD-Group-12/Contact-Manager-App.git .
+
+          run: |
+            cd /var/www/html/
+            git clone git@github.com:POOSD-Group-12/Contact-Manager-App.git .
 
