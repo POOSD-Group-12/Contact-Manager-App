@@ -21,7 +21,7 @@ jobs:
       - name: deploy-app
         uses: appleboy/ssh-action@v0.12
         with:
-          host: ${{secrets.SSH_HOST))
+          host: ${{secrets.SSH_HOST}}
           key: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
 
