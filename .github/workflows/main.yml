@@ -19,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: deploy-app
-        uses: appleboy/ssh-action@v0.1.5
+        uses: garygrossgarten/github-action-ssh@v0.6.3
         with:
           host: ${{secrets.SSH_HOST}}
-          key: ${{secrets.SSH_KEY}}
+          privateKey:: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
 
           run: |
