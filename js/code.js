@@ -218,7 +218,7 @@ function searchContact() //not completed; need to study and ensure understanding
 				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
 				
-				for( let i=0; i<jsonObject.results.length; i++ )
+				for( let i = 0; i < jsonObject.results.length; i++ )
 				{
 					contactList += jsonObject.results[i];
 					if( i < jsonObject.results.length - 1 )
@@ -242,7 +242,39 @@ function searchContact() //not completed; need to study and ensure understanding
 
 function editContact()
 {
+	let curContactFirstName = document.getElementById("contactFirstName").value;
+	let curContactLastName = document.getElementById("contactLastName").value;
+	let curContactCellNumber = document.getElementById("contactCellNumber").value;
+	let curContactEmail = document.getElementById("contactEmail").value;
+	let curUserID = document.getElementById("contactUserID").value; //will need to take the current user ID for the contact that's being edited
+	
+	document.getElementById("contactEditResult").innerHTML = "";
+
+	let tmp = {FirstName:curContactFirstName,LastName:curContactLastName,Phone:curContactCellNumber,Email:curContactEmail,UserID:curUserID};
+	let jsonPayload = JSON.stringify( tmp );
+
 	let url = urlBase + '/EditContact' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				//need to change the contact information
+				document.getElementById("contactEditResult").innerHTML = "Contact has been added";
+			}
+		};
+
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("contactEditResult").innerHTML = err.message;
+	}
 
 }
 
@@ -266,7 +298,8 @@ function deleteContact() //not completed; need to ensure a particular user ID an
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("contactDeletedResult").innerHTML = "Contact has been deleted";
+				//should check if the contact still exists
+				document.getElementById("contactDeletedResult").innerHTML = "Contact has been edited";
 			}
 		};
 
@@ -274,7 +307,7 @@ function deleteContact() //not completed; need to ensure a particular user ID an
 	}
 	catch(err)
 	{
-		document.getElementById("contactSearchResult").innerHTML = err.message;
+		document.getElementById("contactDeletedResult").innerHTML = err.message;
 	}
 
 }
