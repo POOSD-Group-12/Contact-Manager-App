@@ -1,28 +1,45 @@
 <?php
 	$inData = getRequestInfo();
 	
-  $LastName = $inData["LastName"];
   $FirstName = $inData["FirstName"];
+  $LastName = $inData["LastName"];
   $Phone = $inData["Phone"];
 	$Email = $inData["Email"];
 	$UserID = $inData["UserID"];
  
-  // Code below is a placeholder and needs the username password and name of database.
-	$conn = new mysqli("localhost", "TheBeast", "011ee91355156a86cc8ae431e11014966cb21fa05d43c89c", "COP4331");
+
+	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
 	} 
 	else
 	{
-		$stmt = $conn->prepare("UPDATE Contacts SET LastName=?, FirstName=?, Phone=?, Email=? WHERE Id=? ");
-		$stmt->bind_param("ssssi", $LastName, $FirstName, $Phone, $Email, $UserID);
-		$stmt->execute();
-		$stmt->close();
-		$conn->close();
-		returnWithError("");
+		
+		//check if contact exists
+    $stmt = $conn->prepare("SELECT * FROM Contacts WHERE UserID = ?");
+    $stmt->bind_param("s", $UserID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if( $row = $result->fetch_assoc() ) //If yes 
+    {
+      $stmt = $conn->prepare("UPDATE Contacts SET LastName=?, FirstName=?, Phone=?, Email=? WHERE UserID=? ");
+		  $stmt->bind_param("sssss", $LastName, $FirstName, $Phone, $Email, $UserID);
+		  $stmt->execute();
+		  $stmt->close();
+		  $conn->close();
+	  
+      returnWithInfo($FirstName, $LastName, $Phone, $Email, $UserID);
+    }
+    else
+    {
+      // Returns with an error contact doesnt exist.
+      returnWithError("Provided Contact does not exist.");
+      $stmt->close();
+      $conn->close();
+    }
 	}
-
+	
 	function getRequestInfo()
 	{
 		return json_decode(file_get_contents('php://input'), true);
@@ -40,4 +57,10 @@
 		sendResultInfoAsJson( $retValue );
 	}
 	
-?>
+function returnWithInfo( $FirstName, $LastName, $Phone, $Email, $UserID )
+	{
+		$retValue = '{"UserID":"' . $UserID . '", "FirstName":"' . $FirstName . '","LastName":"' . $LastName . '","Phone":"' . $Phone . '","Email":"' . $Email . '", "Status":"UPDATED"}';
+		sendResultInfoAsJson( $retValue );
+	}
+ 
+ ?>
