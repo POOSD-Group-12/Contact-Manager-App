@@ -5,8 +5,8 @@
   $FirstName = $inData["FirstName"];
   $LastName = $inData["LastName"];
   $Phone = $inData["Phone"];
-  $Email = $inData["Email"];
-  $UserID = $inData["UserID"];
+	$Email = $inData["Email"];
+	$UserID = $inData["UserID"];
  
   // Code below is a placeholder and needs the username password and name of database.
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -16,13 +16,29 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("INSERT into Contacts (FirstName,LastName,Phone,Email,UserID) VALUES(?,?,?,?,?)");
-		$stmt->bind_param("sssss", $FirstName, $LastName, $Phone, $Email, $UserID);
-		$stmt->execute();
-		$stmt->close();
-		$conn->close();
+
+   //check if anyone in database has a login matching the login for the new account
+    $stmt = $conn->prepare("SELECT * FROM Contacts WHERE UserID = ?");
+    $stmt->bind_param("s", $UserID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if( $row = $result->fetch_assoc() )
+    {
+      // Returns with an error since that login name is already taken
+      returnWithError("Contact with provided UserID already exists.");
+      $stmt->close();
+    }
+    else
+    {
+      //insert new user to database 
+      $stmt = $conn->prepare("INSERT into Contacts (FirstName,LastName,Phone,Email,UserID) VALUES(?,?,?,?,?)");
+		  $stmt->bind_param("sssss", $FirstName, $LastName, $Phone, $Email, $UserID);
+		  $stmt->execute();
+		  $stmt->close();
+		  $conn->close();
    
-		returnWithInfo($FirstName, $LastName, $Phone, $Email, $UserID);
+		  returnWithInfo($FirstName, $LastName, $Phone, $Email, $UserID);
+    }
 		
 	}
 	
