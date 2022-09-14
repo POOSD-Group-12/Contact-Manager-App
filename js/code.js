@@ -1,4 +1,4 @@
-const urlBase = 'http://www.4331group12-22.xyz/LAMPAPI';
+const urlBase = 'https://4331group12-22.xyz/LAMPAPI';
 const extension = '.php';
 
 let userId = 0;
@@ -32,8 +32,7 @@ function doRegister()
 				let jsonObject = JSON.parse( xhr.responseText );
 				userId = jsonObject.id;
 		
-				if( userId < 1 ) //what does this mean in terms of the logic it's supposed to represent?
-									////how should this change in respect to the registration function?
+				if( userId < 1 )
 				{		
 					document.getElementById("registerResult").innerHTML = "Username is taken; choose another username";
 					return;
@@ -86,11 +85,11 @@ function doLogin()
 					return;
 				}
 		
-				firstName = jsonObject.firstName; //what is the purpose of the firstname and lastname if the php doesn't involve these variables?
+				firstName = jsonObject.firstName;
 				lastName = jsonObject.lastName;
 
-				saveCookie(); //how does saveCookie and readCookie work? what makes these features important?
-	
+				saveCookie(); 
+
 				window.location.href = "Dashboard.html";
 			}
 		};
@@ -213,7 +212,7 @@ function searchContact() //not completed; need to study and ensure understanding
 	{
 		xhr.onreadystatechange = function() 
 		{
-			if (this.readyState == 4 && this.status == 200) //how do the contents of this function work?
+			if (this.readyState == 4 && this.status == 200) 
 			{
 				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
