@@ -1,0 +1,31 @@
+name: CICD
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  super-lint:
+    name: lint code base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+  
+      #- name: Run Super-Linter
+      #  uses: github/super-linter@v3
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy-app
+        uses: garygrossgarten/github-action-ssh@v0.6.3
+        with:
+          command: cd /var/www/html/
+                   git clone git@github.com:POOSD-Group-12/Contact-Manager-App.git .
+                   
+          host: ${{secrets.SSH_HOST}}
+          username: ${{secrets.SSH_USERNAME}}
+          privateKey:: ${{secrets.SSH_KEY}}
+
+
