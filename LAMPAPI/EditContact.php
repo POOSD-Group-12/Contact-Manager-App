@@ -33,7 +33,7 @@
     }
     else
     {
-      // Returns with an error since that login name is already taken
+      // Returns with an error contact doesnt exist.
       returnWithError("Provided Contact does not exist.");
       $stmt->close();
       $conn->close();
