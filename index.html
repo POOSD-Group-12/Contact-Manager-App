@@ -1,22 +1,32 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
-  <title>CONTACT M</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <title>CONTACT MANAGER</title>
+    <script type = "text/javascript" src = "js/code.js"></script>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
-  <header>
+
+<header>
     <h1 id="title">CONTACT MANAGER</h1>
     <h2 id="motto">NETWORK WITH STYLE</h2>
-    <div id="loginDiv">
-      <span id="inner-title">Log In</span>
-      <input type="text" id="loginName" placeholder="Username"><br>
-      <input type="password" id="loginPassword" placeholder="Password"><br>
-      <button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Log In </button>
-      <span id="loginResult"></span>
-      
-      <div id="signupClick">
-        <p>New here? <a href = "signup.html">Register</a> </p>
+    <div class="loginContent">
+      <div id="loginDiv">
+          <span id="inner-title">Log In</span>
+          <!--should include labels for fields on the side for better user accessibility-->
+          <input type="text" id="loginName" placeholder="Username"><br>
+          <input type="password" id="loginPassword" placeholder="Password"><br>
+          <!--need to fix the passwork peek function so it's accessible 
+            whether a password has been added or not AND whether the password text field is selected or not-->
+          <button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Log In </button>
+          <span id="loginResult"></span>
+          
+          <div id="signupClick">
+              <p>New here? <a href = "signup.html">Register</a> </p>
+          </div>
+          <!--include option if the user forgot their password-->
       </div>
     </div>
   <header>
@@ -24,10 +34,7 @@
   <body>
 
     <div>
-        
     </div>
-
-
 
   </body>
   
