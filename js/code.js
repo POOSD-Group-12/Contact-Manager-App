@@ -30,9 +30,9 @@ function doRegister()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
-				userId = jsonObject.Id;
+				error = jsonObject.Error;
 		
-				if( (userId < 1 ) || (login == "") || (login == " ") || (password == "" ) || (password == " " ) ) //needs to be edited to cause the following error feedback message to occur when a user tries to take an already existing username
+				if( error != 0 ) 
 				{		
 					document.getElementById("registerResult").innerHTML = "Username is taken; choose another username";
 					return;
