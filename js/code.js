@@ -30,9 +30,9 @@ function doRegister()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
-				userId = jsonObject.id;
+				userId = jsonObject.Id;
 		
-				if( userId < 1 )
+				if( (userId < 1 ) || (login == "") || (login == " ") || (password == "" ) || (password == " " ) ) //needs to be edited to cause the following error feedback message to occur when a user tries to take an already existing username
 				{		
 					document.getElementById("registerResult").innerHTML = "Username is taken; choose another username";
 					return;
@@ -79,17 +79,17 @@ function doLogin()
 				let jsonObject = JSON.parse( xhr.responseText );
 				userId = jsonObject.id;
 		
-				if( userId < 1 ) 
+				if( (userId < 1 ) || (login == "") || (login == " ") || (password == "" ) || (password == " " ) ) 
 				{		
 					document.getElementById("loginResult").innerHTML = "Username/Password combination incorrect";
 					return;
 				}
 		
-				firstName = jsonObject.firstName;
+				firstName = jsonObject.firstName; 
 				lastName = jsonObject.lastName;
 
 				saveCookie(); 
-
+	
 				window.location.href = "Dashboard.html";
 			}
 		};
@@ -200,7 +200,7 @@ function searchContact() //not completed; need to study and ensure understanding
 	
 	let contactList = "";
 
-	let tmp = {UserID:userId,search:srch};
+	let tmp = {Search:srch};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/SearchContacts' + extension;
@@ -212,7 +212,7 @@ function searchContact() //not completed; need to study and ensure understanding
 	{
 		xhr.onreadystatechange = function() 
 		{
-			if (this.readyState == 4 && this.status == 200) 
+			if (this.readyState == 4 && this.status == 200) //how do the contents of this function work?
 			{
 				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
@@ -310,4 +310,3 @@ function deleteContact() //not completed; need to ensure a particular user ID an
 	}
 
 }
-
