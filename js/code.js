@@ -44,7 +44,7 @@ function doRegister()
 		
 				saveCookie(); //take user information and reroute them to dashboard
           
-        			window.location.href = "Dashboard.html";
+        			setTimeout(() => {  window.location.href = "Dashboard.html"; }, 3000);
 			}
 		};
 
