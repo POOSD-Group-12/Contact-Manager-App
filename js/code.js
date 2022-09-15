@@ -37,7 +37,11 @@ function doRegister()
 					document.getElementById("registerResult").innerHTML = "Username is taken; choose another username";
 					return;
 				}
-	
+				else
+				{
+					document.getElementById("registerResult").innerHTML = "Account successfully created";
+				}
+		
 				window.location.href = "index.html";
 			}
 		};
