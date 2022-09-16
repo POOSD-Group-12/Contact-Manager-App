@@ -1,4 +1,4 @@
-import md5 from "js/md5.js";
+
 
 const urlBase = 'https://4331group12-22.xyz/LAMPAPI';
 const extension = '.php';
@@ -21,9 +21,9 @@ function doRegister()
 		FirstName:firstName,
 		LastName:lastName,
 		Login:username,
-		Password:md5(Password),
+		Password:md5(password),
 	};
-
+  console.log(md5(password))
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/Register' + extension;
@@ -81,7 +81,7 @@ function doLogin()
 		Login: login,
 		Password: md5(password),
 	};
-
+  console.log(md5(password))
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/Login' + extension;
