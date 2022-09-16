@@ -1,3 +1,5 @@
+import md5 from "js/md5.js";
+
 const urlBase = 'https://4331group12-22.xyz/LAMPAPI';
 const extension = '.php';
 
@@ -15,7 +17,13 @@ function doRegister()
 
 	document.getElementById("registerResult").innerHTML = "";
 
-	let tmp = {FirstName:firstName,LastName:lastName,Login:username,Password:password};
+	let tmp = {
+		FirstName:firstName,
+		LastName:lastName,
+		Login:username,
+		Password:md5(Password),
+	};
+	
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/Register' + extension;
@@ -57,6 +65,7 @@ function doRegister()
 
 }
 
+
 function doLogin()
 {
 	userId = 0;
@@ -64,11 +73,15 @@ function doLogin()
 	lastName = "";
 	
 	let login = document.getElementById("loginName").value;
-	let password = document.getElementById("loginPassword").value;
-	
+	let password = getElementById("loginPassword").value;
+
 	document.getElementById("loginResult").innerHTML = "";
 
-	let tmp = {Login:login,Password:password};
+	let tmp = {
+		Login: login,
+		Password: md5(password),
+	};
+
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/Login' + extension;
