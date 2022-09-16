@@ -23,7 +23,7 @@ function doRegister()
 		Login:username,
 		Password:md5(Password),
 	};
-	
+
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/Register' + extension;
@@ -73,7 +73,7 @@ function doLogin()
 	lastName = "";
 	
 	let login = document.getElementById("loginName").value;
-	let password = getElementById("loginPassword").value;
+	let password = document.getElementById("loginPassword").value;
 
 	document.getElementById("loginResult").innerHTML = "";
 
