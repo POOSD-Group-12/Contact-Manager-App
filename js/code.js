@@ -96,7 +96,7 @@ function doLogin()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
-				userId = jsonObject.id;
+				userId = jsonObject.Id;
 		
 				if( (userId < 1 ) || (login == "") || (login == " ") || (password == "" ) || (password == " " ) ) 
 				{		
@@ -104,11 +104,11 @@ function doLogin()
 					return;
 				}
 		
-				firstName = jsonObject.firstName; 
-				lastName = jsonObject.lastName;
+				firstName = jsonObject.FirstName; 
+				lastName = jsonObject.LastName;
 
-				saveCookie(); 
-	
+				saveCookie(firstName, lastName, userId); 
+				console.log(firstName, lastName, userId)
 				window.location.href = "Dashboard.html";
 			}
 		};
@@ -132,7 +132,7 @@ function doLogout()
 
 }
 
-function saveCookie()
+function saveCookie(firstName, lastName, userId)
 {
 	let minutes = 20;
 	let date = new Date();
@@ -170,7 +170,7 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		document.getElementById("userName").innerHTML = "Hi, " + firstName + " " + lastName;
 	}
 
 }
