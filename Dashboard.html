@@ -1,10 +1,9 @@
 <!DOCTYPE HTML> 
 <html>
 <head>
-	<title>CONTACT MANAGER</title>
-	<script type = "text/javascript" src = "js/code.js"></script>
+	<!-- <script type = "text/javascript" src = "js/code.js"></script> /-->
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/styles.css" rel="stylesheet">	
+    <link href="css/Dashboard.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	
 	<script type="text/javascript">
@@ -16,31 +15,46 @@
 	
 </head>
 
+<header>
+	<h1 id="title">CONTACT MANAGER</h1>
+
+	<div id="loggedInDiv">
+		<span id="userName">hi, dddddddd</span><br />
+		<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
+	</div>
+
+</header>
+
 <body>
 
-<h1 id="title">CONTACT MANAGER</h1>
-<h2 id="motto">NETWORK WITH STYLE</h2>
+	<div id="accessUIDiv">
+		<br />
 
-<div id="loggedInDiv">
-	<span id="userName"></span><br />
-	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
-</div>
+		<input type="text" id="searchText" placeholder="Search"/>
+		<button type="button" id="searchColorButton" class="buttons" onclick="searchContact();"> search icon </button><br />
+		<span id="colorSearchResult"></span>
 
-<div id="accessUIDiv">
-	<br />
+	</div>
 
-	<input type="text" id="searchText" placeholder="Color To Search For"/>
-	<button type="button" id="searchColorButton" class="buttons" onclick="searchColor();"> Search Color </button><br />
-	<span id="colorSearchResult"></span>
-	<p id="colorList">
-	</p><br /><br />
+	<div id = "table">
+		<!--this will be made with js-->
+		<div id = "tablePrint">
+	
+		</div>
+	</div>
+	<!--query first contact when nothing else is selected-->
+	<div id = "info">
 
-	<input type="text" id="colorText" placeholder="Color To Add">
-	<button type="button" id="addColorButton" class="buttons" onclick="addColor();"> Add Color </button><br />
-	<span id="colorAddResult"></span>
-</div>
+		<button type="button" id="addColorButton" class="buttons" onclick="addContact();"> Add Contact </button><br />
+		<span id="colorAddResult"></span>
 
-<!--needs to include a table for all the contacts that a user has-->
+		<button type="button" id="addColorButton" class="buttons" onclick="deleteContact();"> Delete Contact </button><br />
+		<span id="colorAddResult"></span> 
+
+		<button type="button" id="addColorButton" class="buttons" onclick="editContact();"> Edit Contact </button><br />
+		<span id="colorAddResult"></span> 
+
+	</div>
 
 </body>
 

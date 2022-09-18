@@ -1,0 +1,22 @@
+#title {
+    font-size: 2rem;
+    font-family: 'Trebuchet MS';
+    letter-spacing: 7px;
+    color: #000000;
+    }
+
+Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    font-size: 2rem;
+    padding: .05%;
+}
+
+body {
+    padding: .5%;
+}
+#accessUIDiv {
+    
+}
