@@ -23,7 +23,6 @@ function doRegister()
 		Login:username,
 		Password:md5(password),
 	};
-  console.log(md5(password))
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/Register' + extension;
@@ -81,7 +80,6 @@ function doLogin()
 		Login: login,
 		Password: md5(password),
 	};
-  console.log(md5(password))
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/Login' + extension;
@@ -96,9 +94,10 @@ function doLogin()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
+				console.log(1)
 				userId = jsonObject.Id;
 		
-				if( (userId < 1 ) || (login == "") || (login == " ") || (password == "" ) || (password == " " ) ) 
+				if( (jsonObject.Id == undefined || userId < 1 ) || (login == "") || (login == " ") || (password == "" ) || (password == " " ) ) 
 				{		
 					document.getElementById("loginResult").innerHTML = "Username/Password combination incorrect";
 					return;
@@ -108,7 +107,6 @@ function doLogin()
 				lastName = jsonObject.LastName;
 
 				saveCookie(firstName, lastName, userId); 
-				console.log(firstName, lastName, userId)
 				window.location.href = "Dashboard.html";
 			}
 		};
@@ -118,6 +116,7 @@ function doLogin()
 	catch(err)
 	{
 		document.getElementById("loginResult").innerHTML = err.message;
+		console.log(2)
 	}
 
 }
