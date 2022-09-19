@@ -282,7 +282,7 @@ function editContact()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				//need to change the contact information
-				document.getElementById("contactEditResult").innerHTML = "Contact has been added";
+				document.getElementById("contactEditResult").innerHTML = "Contact has been changed";
 			}
 		};
 

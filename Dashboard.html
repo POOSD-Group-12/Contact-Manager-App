@@ -1,7 +1,7 @@
 <!DOCTYPE HTML> 
 <html>
 <head>
-	<!-- <script type = "text/javascript" src = "js/code.js"></script> /-->
+	<script type = "text/javascript" src = "js/code.js"></script>
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/Dashboard.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
@@ -15,46 +15,47 @@
 	
 </head>
 
-<header>
-	<h1 id="title">CONTACT MANAGER</h1>
-
-	<div id="loggedInDiv">
-		<span id="userName">hi, dddddddd</span><br />
-		<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
-	</div>
-
-</header>
-
 <body>
+	<nav>
+		<h1 id="title">CONTACT MANAGER</h1>
 
-	<div id="accessUIDiv">
-		<br />
-
-		<input type="text" id="searchText" placeholder="Search"/>
-		<button type="button" id="searchColorButton" class="buttons" onclick="searchContact();"> search icon </button><br />
-		<span id="colorSearchResult"></span>
-
-	</div>
-
-	<div id = "table">
-		<!--this will be made with js-->
-		<div id = "tablePrint">
-	
+		<div id="loggedInDiv">
+			<span id="userName">hi, dddddddd</span><br />
+			<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
 		</div>
-	</div>
-	<!--query first contact when nothing else is selected-->
-	<div id = "info">
+	</nav>
 
-		<button type="button" id="addColorButton" class="buttons" onclick="addContact();"> Add Contact </button><br />
-		<span id="colorAddResult"></span>
+	<section id = "dash">
 
-		<button type="button" id="addColorButton" class="buttons" onclick="deleteContact();"> Delete Contact </button><br />
-		<span id="colorAddResult"></span> 
+		<section id = "search">
+			<div id="accessUIDiv">
+				<br />
 
-		<button type="button" id="addColorButton" class="buttons" onclick="editContact();"> Edit Contact </button><br />
-		<span id="colorAddResult"></span> 
+				<input type="text" id="searchText" placeholder="Search"/>
+				<button type="button" id="searchContact" class="buttons" onclick="searchContact();"> search icon </button><br />
+				<span id="SearchResult"></span>
 
-	</div>
+				<button type="button" id="addContact" class="buttons" onclick="addContact();"> Add Contact </button><br />
+				<span id="colorAddResult"></span>
+
+			</div>
+			
+	</section>
+
+	<section id = "contact">	
+		<!--query first contact when nothing else is selected or add a contact if there is none-->
+		<span></span>
+		
+		<div id = "info">
+
+			<button type="button" id="deleteContact" class="buttons" onclick="deleteContact();"> Delete Contact </button><br />
+			<span id="colorAddResult"></span> 
+
+			<button type="button" id="editContact" class="buttons" onclick="editContact();"> Edit Contact </button><br />
+			<span id="colorAddResult"></span> 
+		</div>
+
+	</section>
 
 </body>
 
