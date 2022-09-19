@@ -3,6 +3,7 @@ body
     background-color: #ffffff;
 }
 
+
 #title 
 {
     font-size: 40px;
@@ -89,9 +90,12 @@ body
 	font-size: 15px;
     border-radius: 2px;
     height: 40px;
-    margin-left: 25%;
     border-color: #000000;
     width: 50%;
+
+    margin-left: 25%;
+    margin-bottom: 2%;
+
 }
 #registerFirstName
 {
@@ -101,6 +105,7 @@ body
     margin-left: 25%;
     border-color: #000000;
     width: 50%;
+    margin-bottom: 2%;
 }
 #registerLastName
 {
@@ -110,6 +115,7 @@ body
     margin-left: 25%;
     border-color: #000000;
     width: 50%;
+    margin-bottom: 2%;
 }
 #registerName
 {
@@ -119,6 +125,7 @@ body
     margin-left: 25%;
     border-color: #000000;
     width: 50%;
+    margin-bottom: 2%;
 }
 #registerPassword
 {
@@ -128,6 +135,7 @@ body
     margin-left: 25%;
     border-color: #000000;
     width: 50%;
+    margin-bottom: 2%;
 }
 #searchText
 {
@@ -143,7 +151,6 @@ input[type="text"],input[type="password"]{
     text-align: center;
     width: 80%;
     margin-left: 10%;
-    margin-bottom: 2%;
     font-family: 'Ubuntu', sans-serif;
 }
 
@@ -156,6 +163,14 @@ input[type="text"],input[type="password"]{
     font-family: 'Trebuchet MS';
     color: #000000;
 }
+label
+{
+    font-size: 1rem;
+    font-family: 'Trebuchet MS';
+    margin-left: 25%;
+
+}
+
 
 #loginResult{
     display: inline-block;
