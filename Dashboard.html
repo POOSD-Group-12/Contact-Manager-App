@@ -1,61 +1,90 @@
-<!DOCTYPE HTML> 
+<!DOCTYPE HTML>
 <html>
+
 <head>
-	<script type = "text/javascript" src = "js/code.js"></script>
-	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/Dashboard.css" rel="stylesheet">	
+    <!--<script type = "text/javascript" src = "js/code.js"></script> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Dashboard.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-	
-	<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() 
-	{
-		readCookie();
-	}, false);
-	</script>
-	
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            readCookie();
+        }, false);
+    </script>
+
 </head>
 
 <body>
-	<nav>
-		<h1 id="title">CONTACT MANAGER</h1>
+    <nav>
+        <h1 id="title">CONTACT MANAGER</h1>
 
-		<div id="loggedInDiv">
-			<span id="userName">hi, dddddddd</span><br />
-			<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
-		</div>
-	</nav>
+        <div id="loggedInDiv">
+            <span id="userName">Welcome, dddddddd</span><br />
+            <button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
+        </div>
+    </nav>
 
-	<section id = "dash">
+    <section id="dash">
 
-		<section id = "search">
-			<div id="accessUIDiv">
-				<br />
+        <section id="search">
+            <div id="accessUIDiv">
+                <br />
+                
+                <input type="text" id="searchText" placeholder="Search" />
+                <!--<button type="button" id="searchContact" class="buttons" onclick="searchContact();"> search icon </button><br />-->
+                <span id="SearchResult"></span>
 
-				<input type="text" id="searchText" placeholder="Search"/>
-				<button type="button" id="searchContact" class="buttons" onclick="searchContact();"> search icon </button><br />
-				<span id="SearchResult"></span>
+                <button type="button" id="addContact" class="buttons" onclick="addContact();"> Add Contact </button><br />
 
-				<button type="button" id="addContact" class="buttons" onclick="addContact();"> Add Contact </button><br />
-				<span id="colorAddResult"></span>
+            </div>
 
-			</div>
-			
-	</section>
+        </section>
 
-	<section id = "contact">	
-		<!--query first contact when nothing else is selected or add a contact if there is none-->
-		<span></span>
-		
-		<div id = "info">
+        <section id="contact">
+            <!--query first contact when nothing else is selected or add a contact if there is none-->
+            <div id="contact-buttons">
 
-			<button type="button" id="deleteContact" class="buttons" onclick="deleteContact();"> Delete Contact </button><br />
-			<span id="colorAddResult"></span> 
+                <button type="button" id="contact-modifier" class="buttons" onclick="deleteContact();"> Delete Contact </button><br />
+                <span id="colorAddResult"></span>
 
-			<button type="button" id="editContact" class="buttons" onclick="editContact();"> Edit Contact </button><br />
-			<span id="colorAddResult"></span> 
-		</div>
+                <button type="button" id="contact-modifier" class="buttons" onclick="editContact();"> Edit Contact </button><br />
+                <span id="colorAddResult"></span>
+            </div>
 
-	</section>
+            
+            <!-- create a modal for this-->
+            <section>
+                    <div id = "">
+                        <span id="selected-contact"></span>
+                        <h3 id="default-selector">select a contact or add one</h3>
+                        <span id="first-name"></span><span id="last-name"></span>
+                    </div>
+                    
+                    </div id = "contact-picture">   
+
+                    <!--only input or span can be displayed once, they need to be swapped depending on add or display,
+                         show both on edit-->
+                    <div id ="Phone">
+                        <label>Phone:</label>
+                        <input id = "Phone-input">
+                        <span id = "Phone"></span>
+                    </div>
+                    <div id = "Email">
+                        <label>Email:</label>
+                        <input id = "Email-input">
+                        <span id = "Email"></span>
+                    </div>
+                    <div id = Address>
+                        <label>Address:</label>
+                        <input id = "Address-input">
+                        <span id = "Address"></span>
+                    </div>
+
+				</div>
+			</section>
+
+        </section>
 
 </body>
 
