@@ -1,9 +1,12 @@
 <?php
 
 	$inData = getRequestInfo();
-	
+  	$UserID = $inData["UserID"];
+	$page = $inData["Page"];
+  	$rate = ($page - 1) *10; //set min on intervals of 10
 	$searchResults = "";
 	$searchCount = 0;
+ 
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -12,9 +15,9 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select * from Contacts where (FirstName like ? or LastName like ?) and UserID = ?");
+		$stmt = $conn->prepare("select * from ContactsTest where UserID = ? AND (FirstName like ? or LastName like ? or Phone like ? or Email like ?)  LIMIT $rate,10");
 		$input = "%" . $inData["Search"] . "%";
-		$stmt->bind_param("sss", $input, $input, $inData["UserID"]);
+		$stmt->bind_param("sssss", $UserID, $input, $input, $input, $input);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
