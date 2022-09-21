@@ -64,7 +64,7 @@
 	
 	function returnWithInfo( $searchResults )
 	{
-		$retValue = '{"results":[' . $searchResults . '],"error":""}';
+		$retValue = '{"results":[' . $searchResults . '],"error":"0"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	

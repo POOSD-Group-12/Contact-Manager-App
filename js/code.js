@@ -1,27 +1,31 @@
-const urlBase = 'http://COP4331-5.com/LAMPAPI';
-const extension = 'php';
+
+
+const urlBase = 'https://4331group12-22.xyz/LAMPAPI';
+const extension = '.php';
 
 let userId = 0;
 let firstName = "";
 let lastName = "";
 
-function doLogin()
+function doRegister()
 {
-	userId = 0;
-	firstName = "";
-	lastName = "";
-	
-	let login = document.getElementById("loginName").value;
-	let password = document.getElementById("loginPassword").value;
-//	var hash = md5( password );
-	
-	document.getElementById("loginResult").innerHTML = "";
 
-	let tmp = {login:login,password:password};
-//	var tmp = {login:login,password:hash};
+	let firstName = document.getElementById("registerFirstName").value;
+	let lastName = document.getElementById("registerLastName").value;
+	let username = document.getElementById("registerName").value;
+	let password = document.getElementById("registerPassword").value;
+
+	document.getElementById("registerResult").innerHTML = "";
+
+	let tmp = {
+		FirstName:firstName,
+		LastName:lastName,
+		Login:username,
+		Password:md5(password),
+	};
 	let jsonPayload = JSON.stringify( tmp );
-	
-	let url = urlBase + '/Login.' + extension;
+
+	let url = urlBase + '/Register' + extension;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -33,37 +37,107 @@ function doLogin()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
-				userId = jsonObject.id;
+				error = jsonObject.Error;
 		
-				if( userId < 1 )
+				if( error != 0 ) 
 				{		
-					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+					document.getElementById("registerResult").innerHTML = "Username is taken; choose another username";
+					return;
+				}
+				else
+				{
+					document.getElementById("registerResult").innerHTML = "Account successfully created";
+				}
+		
+				saveCookie(); //take user information and reroute them to dashboard
+          
+        			setTimeout(() => {  window.location.href = "Dashboard.html"; }, 3000);
+			}
+		};
+
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("registerResult").innerHTML = err.message;
+	}
+
+}
+
+
+function doLogin()
+{
+	userId = 0;
+	firstName = "";
+	lastName = "";
+	
+	let login = document.getElementById("loginName").value;
+	let password = document.getElementById("loginPassword").value;
+
+	document.getElementById("loginResult").innerHTML = "";
+
+	let tmp = {
+		Login: login,
+		Password: md5(password),
+	};
+	let jsonPayload = JSON.stringify( tmp );
+	
+	let url = urlBase + '/Login' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				let jsonObject = JSON.parse( xhr.responseText );
+				console.log(1)
+				userId = jsonObject.Id;
+		
+				if( (jsonObject.Id == undefined || userId < 1 ) || (login == "") || (login == " ") || (password == "" ) || (password == " " ) ) 
+				{		
+					document.getElementById("loginResult").innerHTML = "Username/Password combination incorrect";
 					return;
 				}
 		
-				firstName = jsonObject.firstName;
-				lastName = jsonObject.lastName;
+				firstName = jsonObject.FirstName; 
+				lastName = jsonObject.LastName;
 
-				saveCookie();
-	
-				window.location.href = "color.html";
+				saveCookie(firstName, lastName, userId); 
+				window.location.href = "Dashboard.html";
 			}
 		};
+
 		xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
 		document.getElementById("loginResult").innerHTML = err.message;
+		console.log(2)
 	}
 
 }
 
-function saveCookie()
+function doLogout()
+{
+	userId = 0;
+	firstName = "";
+	lastName = "";
+	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+	window.location.href = "index.html";
+
+}
+
+function saveCookie(firstName, lastName, userId)
 {
 	let minutes = 20;
 	let date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));	
 	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+
 }
 
 function readCookie()
@@ -95,28 +169,25 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		document.getElementById("userName").innerHTML = "Hi, " + firstName + " " + lastName;
 	}
+
 }
 
-function doLogout()
+function addContact()
 {
-	userId = 0;
-	firstName = "";
-	lastName = "";
-	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-	window.location.href = "index.html";
-}
+	let newContactFirstName = document.getElementById("contactFirstName").value;
+	let newContactLastName = document.getElementById("contactLastName").value;
+	let newContactCellNumber = document.getElementById("contactCellNumber").value;
+	let newContactEmail = document.getElementById("contactEmail").value;
+	let newUserID = document.getElementById("contactUserID").value; //will need to take the next available user ID available, then should hopefully be done
+	
+	document.getElementById("contactAddResult").innerHTML = "";
 
-function addColor()
-{
-	let newColor = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
-
-	let tmp = {color:newColor,userId,userId};
+	let tmp = {FirstName:newContactFirstName,LastName:newContactLastName,Phone:newContactCellNumber,Email:newContactEmail,UserID:newUserID};
 	let jsonPayload = JSON.stringify( tmp );
 
-	let url = urlBase + '/AddColor.' + extension;
+	let url = urlBase + '/AddContact' + extension;
 	
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -127,29 +198,30 @@ function addColor()
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
+				document.getElementById("contactAddResult").innerHTML = "Contact has been added";
 			}
 		};
+
 		xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
+		document.getElementById("contactAddResult").innerHTML = err.message;
 	}
 	
 }
 
-function searchColor()
+function searchContact() //not completed; need to study and ensure understanding of how it works
 {
 	let srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
+	document.getElementById("contactSearchResult").innerHTML = "";
 	
-	let colorList = "";
+	let contactList = "";
 
-	let tmp = {search:srch,userId:userId};
+	let tmp = {Search:srch};
 	let jsonPayload = JSON.stringify( tmp );
 
-	let url = urlBase + '/SearchColors.' + extension;
+	let url = urlBase + '/SearchContacts' + extension;
 	
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -158,28 +230,101 @@ function searchColor()
 	{
 		xhr.onreadystatechange = function() 
 		{
-			if (this.readyState == 4 && this.status == 200) 
+			if (this.readyState == 4 && this.status == 200) //how do the contents of this function work?
 			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
+				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
 				
-				for( let i=0; i<jsonObject.results.length; i++ )
+				for( let i = 0; i < jsonObject.results.length; i++ )
 				{
-					colorList += jsonObject.results[i];
+					contactList += jsonObject.results[i];
 					if( i < jsonObject.results.length - 1 )
 					{
-						colorList += "<br />\r\n";
+						contactList += "<br />\r\n";
 					}
 				}
 				
-				document.getElementsByTagName("p")[0].innerHTML = colorList;
+				document.getElementsByTagName("p")[0].innerHTML = contactList;
 			}
 		};
+
 		xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
+		document.getElementById("contactSearchResult").innerHTML = err.message;
 	}
 	
+}
+
+function editContact()
+{
+	let curContactFirstName = document.getElementById("contactFirstName").value;
+	let curContactLastName = document.getElementById("contactLastName").value;
+	let curContactCellNumber = document.getElementById("contactCellNumber").value;
+	let curContactEmail = document.getElementById("contactEmail").value;
+	let curUserID = document.getElementById("contactUserID").value; //will need to take the current user ID for the contact that's being edited
+	
+	document.getElementById("contactEditResult").innerHTML = "";
+
+	let tmp = {FirstName:curContactFirstName,LastName:curContactLastName,Phone:curContactCellNumber,Email:curContactEmail,UserID:curUserID};
+	let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/EditContact' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				//need to change the contact information
+				document.getElementById("contactEditResult").innerHTML = "Contact has been changed";
+			}
+		};
+
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("contactEditResult").innerHTML = err.message;
+	}
+
+}
+
+function deleteContact() //not completed; need to ensure a particular user ID and its content are deleted from a contact list
+{
+	let userIdToDelete = document.getElementById("contactUserID").value; //will need to get the user ID for the contact being deleted
+	
+	document.getElementById("contactDeleteResult").innerHTML = "";
+
+	//let tmp = {UserID:userIdToDelete};
+	//let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/DeleteContact' + extension;
+	
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				//should check if the contact still exists
+				document.getElementById("contactDeletedResult").innerHTML = "Contact has been edited";
+			}
+		};
+
+		xhr.send(null);
+	}
+	catch(err)
+	{
+		document.getElementById("contactDeletedResult").innerHTML = err.message;
+	}
+
 }

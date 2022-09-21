@@ -1,8 +1,9 @@
+<!DOCTYPE HTML> 
 <html>
 <head>
-	<title>COP 4331 LAMP Stack Demo</title>
-	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
+	<script type = "text/javascript" src = "js/code.js"></script>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Dashboard.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	
 	<script type="text/javascript">
@@ -13,28 +14,49 @@
 	</script>
 	
 </head>
+
 <body>
+	<nav>
+		<h1 id="title">CONTACT MANAGER</h1>
 
-<h1 id="title">COP 4331 LAMP Stack Demo</h1>
+		<div id="loggedInDiv">
+			<span id="userName">hi, dddddddd</span><br />
+			<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
+		</div>
+	</nav>
 
-<div id="loggedInDiv">
-	<span id="userName"></span><br />
-	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
-</div>
+	<section id = "dash">
 
-<div id="accessUIDiv">
-	<br />
+		<section id = "search">
+			<div id="accessUIDiv">
+				<br />
 
-	<input type="text" id="searchText" placeholder="Color To Search For"/>
-	<button type="button" id="searchColorButton" class="buttons" onclick="searchColor();"> Search Color </button><br />
-	<span id="colorSearchResult"></span>
-	<p id="colorList">
-	</p><br /><br />
+				<input type="text" id="searchText" placeholder="Search"/>
+				<button type="button" id="searchContact" class="buttons" onclick="searchContact();"> search icon </button><br />
+				<span id="SearchResult"></span>
 
-	<input type="text" id="colorText" placeholder="Color To Add">
-	<button type="button" id="addColorButton" class="buttons" onclick="addColor();"> Add Color </button><br />
-	<span id="colorAddResult"></span>
-</div>
+				<button type="button" id="addContact" class="buttons" onclick="addContact();"> Add Contact </button><br />
+				<span id="colorAddResult"></span>
+
+			</div>
+			
+	</section>
+
+	<section id = "contact">	
+		<!--query first contact when nothing else is selected or add a contact if there is none-->
+		<span></span>
+		
+		<div id = "info">
+
+			<button type="button" id="deleteContact" class="buttons" onclick="deleteContact();"> Delete Contact </button><br />
+			<span id="colorAddResult"></span> 
+
+			<button type="button" id="editContact" class="buttons" onclick="editContact();"> Edit Contact </button><br />
+			<span id="colorAddResult"></span> 
+		</div>
+
+	</section>
 
 </body>
+
 </html>

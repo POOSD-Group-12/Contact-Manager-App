@@ -35,7 +35,7 @@
 		  $stmt->close();
 		  $conn->close();
    
-		  returnWithInfo($FirstName, $LastName, $Login, $Password, $var);
+		  returnWithInfo($FirstName, $LastName, $Login, $Password, 0);
     }
   }
 
@@ -53,13 +53,13 @@
   function returnWithError( $err )
   {
 
-    $retValue = '{"error":"' . $err . '"}';
+    $retValue = '{"Error":"' . $err . '"}';
     sendResultInfoAsJson( $retValue );
   }
 	
 	function returnWithInfo( $FirstName, $LastName, $Login, $Password, $var)
 	{
-		$retValue = '{"FirstName":"' . $FirstName . '","LastName":"' . $LastName . '","Login":"' . $Login . '","Password":"' . $Password . '", "Status": "' . $var . '"}';
+		$retValue = '{"FirstName":"' . $FirstName . '","LastName":"' . $LastName . '","Login":"' . $Login . '","Password":"' . $Password . '", "Error": "' . $var . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
  

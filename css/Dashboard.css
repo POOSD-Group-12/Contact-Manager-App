@@ -1,0 +1,62 @@
+#title {
+    font-size: 2rem;
+    font-family: 'Trebuchet MS';
+    letter-spacing: 7px;
+    color: #000000;
+    }
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    font-size: 2rem;
+    padding: .05%;
+
+    //guide;
+    background-color:green;
+}
+
+body {
+    padding: .5%;
+}
+
+#dash {
+    //margin-top: 1rem;
+    display: flex;
+}
+
+#search {
+    //guide;    
+    background-color: #ffc279;
+
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    width: 30%;
+}
+#accessUIDiv {
+    display: inline-flex;   
+    justify-content: space-between;
+    width: 100%;
+
+}
+#searchText{
+    width: 60%
+}
+.buttons{
+    
+}
+
+#contact {
+    //guide;    
+    background-color:aquamarine;
+
+    padding-right: 3%;
+    width: 100%
+}
+#info {
+    display: inline-flex;   
+    width: 50%
+    
+}
