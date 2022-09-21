@@ -177,10 +177,12 @@ function addContact() {
 
 }
 
-function searchContact() //not completed; need to study and ensure understanding of how it works
+function searchContact(event) //not completed; need to study and ensure understanding of how it works
 {
+    if (event.keyCode != 13) {
+        return
+    }
     let srch = document.getElementById("searchText").value;
-    document.getElementById("contactSearchResult").innerHTML = "";
 
     let contactList = "";
 
