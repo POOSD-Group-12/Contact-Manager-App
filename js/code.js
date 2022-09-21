@@ -40,9 +40,9 @@ function doRegister() {
                     document.getElementById("registerResult").innerHTML = "Account successfully created";
                 }
 
-                saveCookie(); //take user information and reroute them to dashboard
+                //saveCookie(firstName, lastName, userId); //take user information and reroute them to dashboard
 
-                setTimeout(() => { window.location.href = "Dashboard.html"; }, 3000);
+                setTimeout(() => { window.location.href = "index.html"; }, 3000);
             }
         };
 
@@ -119,8 +119,6 @@ function saveCookie(firstName, lastName, userId) {
     document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 
 }
-
-function readCookie() {}
 
 function readCookie() {
     userId = -1;
