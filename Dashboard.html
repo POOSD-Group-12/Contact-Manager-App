@@ -54,11 +54,14 @@
 
             
             <!-- create a modal for this-->
-            <section>
+            <section id = "display-contacts">
                     <div id = "">
                         <span id="selected-contact"></span>
                         <h3 id="default-selector">select a contact or add one</h3>
-                        <span id="first-name"></span><span id="last-name"></span>
+                        <span id="first-name">he</span><span id="last-name">he</span>
+                        <input id = "contactFirstName" placeholder="first" class = "hidden">
+                        <input id = "contactLastName" placeholder="last" class = "hidden">
+
                     </div>
                     
                     </div id = "contact-picture">   
@@ -67,18 +70,18 @@
                          show both on edit-->
                     <div id ="Phone">
                         <label>Phone:</label>
-                        <input id = "Phone-input">
-                        <span id = "Phone"></span>
+                        <input id = "contactCellNumber" class = "hidden"  placeholder="phone number">
+                        <span id = "Phonedisplay">4000</span>
                     </div>
-                    <div id = "Email">
+                    <div id = "email">
                         <label>Email:</label>
-                        <input id = "Email-input">
-                        <span id = "Email"></span>
+                        <input id = "contactEmail" class = "hidden"  placeholder="email">
+                        <span id = "Emaildisplay">4000</span>
                     </div>
                     <div id = Address>
                         <label>Address:</label>
-                        <input id = "Address-input">
-                        <span id = "Address"></span>
+                        <input id = "Address-input" class = "hidden">
+                        <span id = "Address">4000</span>
                     </div>
 
 				</div>

@@ -175,7 +175,9 @@ function readCookie()
 }
 
 function addContact()
-{
+{	
+	toggleAddO();
+
 	let newContactFirstName = document.getElementById("contactFirstName").value;
 	let newContactLastName = document.getElementById("contactLastName").value;
 	let newContactCellNumber = document.getElementById("contactCellNumber").value;
@@ -259,6 +261,7 @@ function searchContact() //not completed; need to study and ensure understanding
 
 function editContact()
 {
+	toggleAddO(); 
 	let curContactFirstName = document.getElementById("contactFirstName").value;
 	let curContactLastName = document.getElementById("contactLastName").value;
 	let curContactCellNumber = document.getElementById("contactCellNumber").value;
@@ -327,4 +330,43 @@ function deleteContact() //not completed; need to ensure a particular user ID an
 		document.getElementById("contactDeletedResult").innerHTML = err.message;
 	}
 
+}
+function toggleAddO() { 
+	element = getElementById(".contactFirstName"); 
+    element2 = getElementById(".contactLastName"); 
+	element3 = getElementById(".contactCellNumber"); 
+	element4 = getElementById(".contactEmail"); 
+    element.style.display = 'block';
+    element2.style.display = 'block';
+	element3.style.display = 'block';
+	element4.style.display = 'block';
+
+	element = getElementById(".first-name"); 
+    element2 = getElementById(".last-name"); 
+	element3 = getElementById(".Phonedisplay"); 
+	element4 = getElementById(".Emaildisplay"); 
+	element.style.display = 'none';
+    element2.style.display = 'none';
+	element3.style.display = 'none';
+	element4.style.display = 'none';
+} 
+
+function toggleAddOff() { 
+	element = getElementById(".contactFirstName"); 
+    element2 = getElementById(".contactLastName"); 
+	element3 = getElementById(".contactCellNumber"); 
+	element4 = getElementById(".contactEmail"); 
+    element.style.display = 'none';
+    element2.style.display = 'none';
+	element3.style.display = 'none';
+	element4.style.display = 'none';
+
+	element = getElementById(".first-name"); 
+    element2 = getElementById(".last-name"); 
+	element3 = getElementById(".Phonedisplay"); 
+	element4 = getElementById(".Emaildisplay"); 
+	element.style.display = 'block';
+    element2.style.display = 'block';
+	element3.style.display = 'block';
+	element4.style.display = 'block';
 }

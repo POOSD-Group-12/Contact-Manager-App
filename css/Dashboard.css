@@ -60,3 +60,11 @@ body {
     display: inline-flex;
     width: 50%
 }
+
+.hidden{
+    display: none;
+}
+/*not hidden*/
+.edit-button{
+
+}
