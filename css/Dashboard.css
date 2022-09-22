@@ -1,26 +1,149 @@
 #title {
-    font-size: 2rem;
+    font-size: 30px;
+    width: 30%;
+    margin-left: 8.5%;
+    margin-top: 2%;
     font-family: 'Trebuchet MS';
-    letter-spacing: 7px;
+    letter-spacing: 9px;
+    transform: scale(1.2, 1);
     color: #000000;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    font-size: 2rem;
-    padding: .05%;
-    /*guide;*/
-    background-color: green;
+span
+{
+    color: #000000;
 }
 
-body {
+ul
+{
+    padding: 0;
+}
+
+li
+{
+    display: inline;
+    padding: 0px 90px;
+    font-size: 20px;
+    /* font-family: Inter-Thin; */
+}
+
+nav 
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background-color: #ffffff;
+}
+
+.logoutButton
+{
+    background-color: #000000;
+    border:#000000;
+    color: #ffffff;
+    width: 150px;
+    text-align: center;
+    font-size: 15px;
+    padding: 8px;
+}
+
+.logoutButton:hover
+{
+    color: #000000;
+    background-color: rgba(255, 122, 45, 0.693);
+}
+
+body 
+{
     padding-top: .05%;
     padding-right: .05%;
     padding-left: .05%;
     padding-bottom: 0;
+}
+
+.buttons 
+{
+    display: list-item;
+    padding-top: 10px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+    padding-right: 10px; 
+    border-radius: 5px;
+    
+}
+
+.buttons:hover
+{
+    background-color: rgba(255, 122, 45, 0.693);
+    color: #ffffff;
+    opacity: 100%;
+}
+
+.parent 
+{
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    left: 20px;
+    bottom: 20px;
+    border: 1px solid rgb(255, 255, 255);
+    margin: 1rem;
+    padding: 1rem 1rem;
+    text-align: center;
+}
+
+#search
+{
+    position: absolute;
+    left: 50px;
+    top: 18px;
+    right: 900px;
+    bottom: 18px;
+    display: inline-block;
+    background-color: rgba(185, 85, 29, 0.1);
+    padding: 20rem 15rem;
+    vertical-align: middle;
+    box-shadow: 0px 2px 2px 0px rgb(208, 207, 207);
+}
+
+#accessUIDiv 
+{
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#searchText
+{
+    position: absolute;
+    width: 70%;
+    top: 30px;
+    left: 30px;
+    padding: 10px;
+    border: #00000000;
+    border-radius: 5px;
+    box-shadow: 0px 1px 1px 0px rgba(162, 162, 162, 0.639);
+}
+
+#addContact
+{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
+#contact
+{
+    position: absolute;
+    right: 30px;
+    left: 525px;
+    top: 18px;
+    bottom: 18px;
+    display: inline-block;
+    /* border: 1px solid rgb(255, 255, 255); */
+    padding: 20rem 21rem;
+    vertical-align: middle;
+    margin-left: 3%;
+    box-shadow: 1px 1px 2px 1px rgb(208, 207, 207);
 }
 
 #dash {
@@ -28,33 +151,19 @@ body {
     display: flex;
 }
 
-#search {
-    /*guide;*/
-    background-color: #ffc279;
-    flex-direction: column;
-    justify-content: center;
-    height: 90vh;
-    width: 30%;
+#loggedInDiv
+{
+    margin: 0;
+    padding: 0;
+    margin-right: 10%;
+    font-size: 20px;
+    font-family: sans-serif;
+    letter-spacing: 7px;
 }
 
-#accessUIDiv {
-    display: inline-flex;
-    justify-content: space-between;
-    width: 100%;
-}
 
-#searchText {
-    width: 70%
-}
 
-.buttons {}
 
-#contact {
-    /*guide;*/
-    background-color: aquamarine;
-    padding-right: 3%;
-    width: 100%
-}
 
 #contact-buttons {
     display: inline-flex;
@@ -65,6 +174,7 @@ body {
     display: none;
 }
 /*not hidden*/
-.edit-button{
-
+.edit-button
+{
+    background-color: #c76c6c;
 }
