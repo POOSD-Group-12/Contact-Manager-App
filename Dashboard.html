@@ -16,15 +16,19 @@
 
 </head>
 
-<body>
+<header>
+
     <nav>
         <h1 id="title">CONTACT MANAGER</h1>
-
-        <div id="loggedInDiv">
-            <span id="userName">Welcome,</span><br />
-            <button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
-        </div>
+        <ul>
+            <li id="welcome"><i>Welcome, <span id="userName">Firstname</span>!</i></li>
+            <li><button type="buttons" id="logoutButton" class="logoutButton" onclick="doLogout();"> Log Out</button></li>
+        </ul>
     </nav>
+    
+</header>
+
+<body>
 
     <section id="dash">
 
