@@ -10,6 +10,7 @@
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
             readCookie();
+            searchContact();
         }, false);
     </script>
 
@@ -85,6 +86,10 @@
                 </div>
                 <button id="done" class="hidden" onclick="addContact();">Done</button>
                 <button id="cancel" class="hidden" onclick="toggleAddOff();">Cancel</button>
+                </div>
+
+                <div id="contact-success">
+                    <span id="contactAddResult"></span>
                 </div>
             </section>
 
