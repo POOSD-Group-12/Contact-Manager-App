@@ -3,7 +3,7 @@
     font-family: 'Trebuchet MS';
     letter-spacing: 7px;
     color: #000000;
-    }
+}
 
 nav {
     display: flex;
@@ -12,51 +12,59 @@ nav {
     position: relative;
     font-size: 2rem;
     padding: .05%;
-
-    //guide;
-    background-color:green;
+    /*guide;*/
+    background-color: green;
 }
 
 body {
-    padding: .5%;
+    padding-top: .05%;
+    padding-right: .05%;
+    padding-left: .05%;
+    padding-bottom: 0;
 }
 
 #dash {
-    //margin-top: 1rem;
+    /*margin-top: 1rem;*/
     display: flex;
 }
 
 #search {
-    //guide;    
+    /*guide;*/
     background-color: #ffc279;
-
     flex-direction: column;
     justify-content: center;
-    height: 100vh;
+    height: 90vh;
     width: 30%;
 }
+
 #accessUIDiv {
-    display: inline-flex;   
+    display: inline-flex;
     justify-content: space-between;
     width: 100%;
+}
 
+#searchText {
+    width: 70%
 }
-#searchText{
-    width: 60%
-}
-.buttons{
-    
-}
+
+.buttons {}
 
 #contact {
-    //guide;    
-    background-color:aquamarine;
-
+    /*guide;*/
+    background-color: aquamarine;
     padding-right: 3%;
     width: 100%
 }
-#info {
-    display: inline-flex;   
+
+#contact-buttons {
+    display: inline-flex;
     width: 50%
-    
+}
+
+.hidden{
+    display: none;
+}
+/*not hidden*/
+.edit-button{
+
 }
