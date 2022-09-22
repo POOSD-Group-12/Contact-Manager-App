@@ -143,7 +143,7 @@
         }
 
     }
-
+    //not api working
     function addContact() {
 
         let newContactFirstName = document.getElementById("contactFirstName").value;
@@ -233,11 +233,19 @@
         let curContactLastName = document.getElementById("contactLastName").value;
         let curContactCellNumber = document.getElementById("contactCellNumber").value;
         let curContactEmail = document.getElementById("contactEmail").value;
-        let curUserID = document.getElementById("contactUserID").value; //will need to take the current user ID for the contact that's being edited
+        let curContactid = document.getElementById("contactUserID").value; //will need to take the current user ID for the contact that's being edited
 
         document.getElementById("contactEditResult").innerHTML = "";
 
-        let tmp = { FirstName: curContactFirstName, LastName: curContactLastName, Phone: curContactCellNumber, Email: curContactEmail, UserID: curUserID };
+        let tmp = { 
+            FirstName: curContactFirstName, 
+            LastName: curContactLastName, 
+            Phone: curContactCellNumber, 
+            Email: curContactEmail, 
+            UserID: userId,
+            ContactID: curContactid,
+        };
+
         let jsonPayload = JSON.stringify(tmp);
 
         let url = urlBase + '/EditContact' + extension;
@@ -262,12 +270,18 @@
 
     function deleteContact() //not completed; need to ensure a particular user ID and its content are deleted from a contact list
     {
-        let userIdToDelete = document.getElementById("contactUserID").value; //will need to get the user ID for the contact being deleted
+    
+        let ContactIDToDelete = document.getElementById("contactUserID").value; //will need to get the user ID for the contact being deleted
 
+        //create modal asking are you sure
+        alert("you are about to delete");
         document.getElementById("contactDeleteResult").innerHTML = "";
 
-        //let tmp = {UserID:userIdToDelete};
-        //let jsonPayload = JSON.stringify( tmp );
+        let tmp = {
+            ContactID : ContactIDToDelete
+        };
+
+        let jsonPayload = JSON.stringify( tmp );
 
         let url = urlBase + '/DeleteContact' + extension;
 
@@ -278,11 +292,11 @@
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     //should check if the contact still exists
-                    document.getElementById("contactDeletedResult").innerHTML = "Contact has been edited";
+                    document.getElementById("contactDeletedResult").innerHTML = "Contact has been deleted";
                 }
             };
 
-            xhr.send(null);
+            xhr.send(jsonPayload);
         } catch (err) {
             document.getElementById("contactDeletedResult").innerHTML = err.message;
         }
