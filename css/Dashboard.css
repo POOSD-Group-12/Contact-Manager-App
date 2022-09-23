@@ -258,11 +258,19 @@ body
     opacity: 100%;
 }
 
+#cancel-modifier {
+    display : none;
+}
+
 #edit-buttons
 {
     display: inline-flex;
 }
 
+#done 
+{
+    display: none;
+}
 .cancel-button
 {
     width: 150px;
@@ -289,3 +297,4 @@ body
 .hidden{
     display: none;
 }
+
