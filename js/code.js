@@ -1,185 +1,391 @@
-const urlBase = 'http://COP4331-5.com/LAMPAPI';
-const extension = 'php';
+    const urlBase = 'https://4331group12-22.xyz/LAMPAPI';
+    const extension = '.php';
 
-let userId = 0;
-let firstName = "";
-let lastName = "";
+    let userId = 0;
+    let firstName = "";
+    let lastName = "";
+    let boolAdd = 0;
+    let boolEdit = 0;
+    function doRegister() {
 
-function doLogin()
-{
-	userId = 0;
-	firstName = "";
-	lastName = "";
-	
-	let login = document.getElementById("loginName").value;
-	let password = document.getElementById("loginPassword").value;
-//	var hash = md5( password );
-	
-	document.getElementById("loginResult").innerHTML = "";
+        let firstName = document.getElementById("registerFirstName").value;
+        let lastName = document.getElementById("registerLastName").value;
+        let username = document.getElementById("registerName").value;
+        let password = document.getElementById("registerPassword").value;
 
-	let tmp = {login:login,password:password};
-//	var tmp = {login:login,password:hash};
-	let jsonPayload = JSON.stringify( tmp );
-	
-	let url = urlBase + '/Login.' + extension;
+        document.getElementById("registerResult").innerHTML = "";
 
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				let jsonObject = JSON.parse( xhr.responseText );
-				userId = jsonObject.id;
-		
-				if( userId < 1 )
-				{		
-					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
-					return;
-				}
-		
-				firstName = jsonObject.firstName;
-				lastName = jsonObject.lastName;
+        let tmp = {
+            FirstName: firstName,
+            LastName: lastName,
+            Login: username,
+            Password: md5(password),
+        };
+        let jsonPayload = JSON.stringify(tmp);
 
-				saveCookie();
-	
-				window.location.href = "color.html";
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("loginResult").innerHTML = err.message;
-	}
+        let url = urlBase + '/Register' + extension;
 
-}
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try {
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let jsonObject = JSON.parse(xhr.responseText);
+                    error = jsonObject.error;
+                    console.log(error)
 
-function saveCookie()
-{
-	let minutes = 20;
-	let date = new Date();
-	date.setTime(date.getTime()+(minutes*60*1000));	
-	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
-}
+                    if (jsonObject.Status == 1){
+                        document.getElementById("registerResult").innerHTML = "Account successfully created";
+                    }
+                    else {
+                        document.getElementById("registerResult").innerHTML = error;
+                        return;                    
+                    }
 
-function readCookie()
-{
-	userId = -1;
-	let data = document.cookie;
-	let splits = data.split(",");
-	for(var i = 0; i < splits.length; i++) 
-	{
-		let thisOne = splits[i].trim();
-		let tokens = thisOne.split("=");
-		if( tokens[0] == "firstName" )
-		{
-			firstName = tokens[1];
-		}
-		else if( tokens[0] == "lastName" )
-		{
-			lastName = tokens[1];
-		}
-		else if( tokens[0] == "userId" )
-		{
-			userId = parseInt( tokens[1].trim() );
-		}
-	}
-	
-	if( userId < 0 )
-	{
-		window.location.href = "index.html";
-	}
-	else
-	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
-	}
-}
+                    //saveCookie(firstName, lastName, userId); //take user information and reroute them to dashboard
 
-function doLogout()
-{
-	userId = 0;
-	firstName = "";
-	lastName = "";
-	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-	window.location.href = "index.html";
-}
+                    setTimeout(() => { window.location.href = "index.html"; }, 3000);
+                }
+            };
 
-function addColor()
-{
-	let newColor = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
+            xhr.send(jsonPayload);
+        } catch (err) {
+            document.getElementById("registerResult").innerHTML = err.message;
+        }
 
-	let tmp = {color:newColor,userId,userId};
-	let jsonPayload = JSON.stringify( tmp );
+    }
 
-	let url = urlBase + '/AddColor.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
-	}
-	
-}
 
-function searchColor()
-{
-	let srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
-	
-	let colorList = "";
+    function doLogin() {
+        userId = 0;
+        firstName = "";
+        lastName = "";
 
-	let tmp = {search:srch,userId:userId};
-	let jsonPayload = JSON.stringify( tmp );
+        let login = document.getElementById("loginName").value;
+        let password = document.getElementById("loginPassword").value;
 
-	let url = urlBase + '/SearchColors.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
-				let jsonObject = JSON.parse( xhr.responseText );
-				
-				for( let i=0; i<jsonObject.results.length; i++ )
-				{
-					colorList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
-					{
-						colorList += "<br />\r\n";
-					}
-				}
-				
-				document.getElementsByTagName("p")[0].innerHTML = colorList;
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
-	}
-	
-}
+        document.getElementById("loginResult").innerHTML = "";
+
+        let tmp = {
+            Login: login,
+            Password: md5(password),
+        };
+        let jsonPayload = JSON.stringify(tmp);
+
+        let url = urlBase + '/Login' + extension;
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try {
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let jsonObject = JSON.parse(xhr.responseText);
+                    console.log(1)
+                    userId = jsonObject.Id;
+
+                    if ((jsonObject.Id == undefined || userId < 1) || (login == "") || (login == " ") || (password == "") || (password == " ")) {
+                        document.getElementById("loginResult").innerHTML = "Username/Password combination incorrect";
+                        return;
+                    }
+
+                    firstName = jsonObject.FirstName;
+                    lastName = jsonObject.LastName;
+
+                    saveCookie(firstName, lastName, userId);
+                    window.location.href = "Dashboard.html";
+                }
+            };
+
+            xhr.send(jsonPayload);
+        } catch (err) {
+            document.getElementById("loginResult").innerHTML = err.message;
+            console.log(2)
+        }
+
+    }
+
+    function doLogout() {
+        userId = 0;
+        firstName = "";
+        lastName = "";
+        document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+        window.location.href = "index.html";
+
+    }
+
+    function saveCookie(firstName, lastName, userId) {
+        let minutes = 20;
+        let date = new Date();
+        date.setTime(date.getTime() + (minutes * 60 * 1000));
+        document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+
+    }
+
+    function readCookie() {
+        userId = -1;
+        let data = document.cookie;
+        let splits = data.split(",");
+        for (var i = 0; i < splits.length; i++) {
+            let thisOne = splits[i].trim();
+            let tokens = thisOne.split("=");
+            if (tokens[0] == "firstName") {
+                firstName = tokens[1];
+            } else if (tokens[0] == "lastName") {
+                lastName = tokens[1];
+            } else if (tokens[0] == "userId") {
+                userId = parseInt(tokens[1].trim());
+            }
+        }
+
+        if (userId < 0) {
+            window.location.href = "index.html";
+        } else {
+            document.getElementById("userName").innerHTML = "Hi, " + firstName + " " + lastName;
+        }
+
+    }
+
+    //done
+    function addContact() {
+
+        let newContactFirstName = document.getElementById("contactFirstName").value;
+        let newContactLastName = document.getElementById("contactLastName").value;
+        let newContactCellNumber = document.getElementById("contactCellNumber").value;
+        let newContactEmail = document.getElementById("contactEmail").value;
+        let newUserID = userId //will need to take the next available user ID available, then should hopefully be done
+
+
+        //document.getElementById("contactAddResult").innerHTML = "";
+
+        let tmp = { FirstName: newContactFirstName, LastName: newContactLastName, Phone: newContactCellNumber, Email: newContactEmail, UserID: newUserID };
+        let jsonPayload = JSON.stringify(tmp);
+
+        let url = urlBase + '/AddContact' + extension;
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try {
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let jsonObject = JSON.parse(xhr.responseText);
+                    //document.getElementById("contactAddResult").innerHTML = jsonObject.Status;
+                    //use the modal to show that error or if it was successful
+                }
+            };
+
+            xhr.send(jsonPayload);
+        } catch (err) {
+            console.log(err)
+            //modal for error display
+        }
+        toggleAddOff();
+        boolAdd = 0;
+    }
+
+    function searchContact(event) //not completed; need to study and ensure understanding of how it works
+    {
+        //default
+        let srch = "";
+        if (event.keyCode != 13) {
+            return
+        }
+        srch = document.getElementById("searchText").value;
+
+        let contactList = "";
+
+        let tmp = {
+            UserID: userId,
+            Search: srch,
+            Page: "1"
+        };
+        let jsonPayload = JSON.stringify(tmp);
+
+        let url = urlBase + '/SearchContacts' + extension;
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try {
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) //how do the contents of this function work?
+                {
+                    document.getElementById("SearchResult").innerHTML = "Contact(s) has been retrieved";
+                    let jsonObject = JSON.parse(xhr.responseText);
+
+                    for (let i = 0; i < jsonObject.results.length; i++) {
+                        contactList += jsonObject.results[i];
+                        if (i < jsonObject.results.length - 1) {
+                            contactList += "<br />\r\n";
+                        }
+                    }
+
+                    document.getElementsById("SearchResult").innerHTML = contactList;
+                }
+            };
+
+            xhr.send(jsonPayload);
+        } catch (err) {
+            document.getElementById("contactSearchResult").innerHTML = err.message;
+        }
+
+    }
+
+    function editContact() {
+
+        let curContactFirstName = document.getElementById("contactFirstName").value;
+        let curContactLastName = document.getElementById("contactLastName").value;
+        let curContactCellNumber = document.getElementById("contactCellNumber").value;
+        let curContactEmail = document.getElementById("contactEmail").value;
+        //let curContactid = document.getElementById("contactUserID").value; //will need to take the current user ID for the contact that's being edited
+
+        document.getElementById("contactEditResult").innerHTML = "";
+
+        let tmp = { 
+            FirstName: curContactFirstName, 
+            LastName: curContactLastName, 
+            Phone: curContactCellNumber, 
+            Email: curContactEmail, 
+            UserID: userId,
+            ContactID: curContactid,
+        };
+
+        let jsonPayload = JSON.stringify(tmp);
+
+        let url = urlBase + '/EditContact' + extension;
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try {
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    //need to change the contact information
+                    document.getElementById("contactEditResult").innerHTML = "Contact has been changed";
+                }
+            };
+
+            xhr.send(jsonPayload);
+        } catch (err) {
+            document.getElementById("contactEditResult").innerHTML = err.message;
+        }
+        toggleAddOff();
+        boolEdit = 0;
+    }
+
+    function deleteContact() //not completed; need to ensure a particular user ID and its content are deleted from a contact list
+    {
+    
+        //let ContactIDToDelete = document.getElementById("contactUserID").value; //will need to get the user ID for the contact being deleted
+
+        //create modal asking are you sure
+        alert("you are about to delete");
+        document.getElementById("contactDeleteResult").innerHTML = "";
+
+        let tmp = {
+            ContactID : ContactIDToDelete
+        };
+
+        let jsonPayload = JSON.stringify( tmp );
+
+        let url = urlBase + '/DeleteContact' + extension;
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try {
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    //should check if the contact still exists
+                    alert("contact deleted!")
+                }
+            };
+
+            xhr.send(jsonPayload);
+        } catch (err) {
+            document.getElementById("contactDeletedResult").innerHTML = err.message;
+        }
+
+    }
+
+    function checkAddorEdit(){
+        // 1 means that in add or edit mode which enables the done button for that specific mode
+        if (boolAdd == 1) {
+            addContact();
+        }
+
+        else if(boolEdit == 1) {
+            editContact();
+        }
+    }
+    
+    function addContactWrapper() {
+        boolAdd = 1;
+        toggleAdd();
+    }
+
+    function editContactWrapper() {
+        boolEdit = 1;
+        toggleAdd();
+    }
+
+    function cancelChanges() {
+        toggleAddOff()
+        boolEdit = 0;
+        boolAdd = 0;
+    }
+
+    function emailchecker(){
+
+    }
+    
+    function phonechecker(){
+
+    }
+    function toggleAdd() {
+        document.getElementById("first-namep").style.display = 'block';
+        document.getElementById("last-namep").style.display = 'block';
+
+        document.getElementById("contactFirstName").style.display = 'block';
+        document.getElementById("contactLastName").style.display = 'block';
+        document.getElementById("contactCellNumber").style.display = 'block';
+        document.getElementById("contactEmail").style.display = 'block';
+        document.getElementById("done").style.display = 'block';
+        document.getElementById("cancel-modifier").style.display = 'block';
+
+        document.getElementById("first-name").style.display = 'none';
+        document.getElementById("last-name").style.display = 'none';
+        document.getElementById("Phonedisplay").style.display = 'none';
+        document.getElementById("Emaildisplay").style.display = 'none';
+
+        document.getElementById("delete-modifier").style.display = 'none';
+        document.getElementById("edit-modifier").style.display = 'none';
+
+    }
+
+    function toggleAddOff() {
+        document.getElementById("first-namep").style.display = 'none';
+        document.getElementById("last-namep").style.display = 'none';
+
+        document.getElementById("contactFirstName").style.display = 'none'
+        document.getElementById("contactLastName").style.display = 'none';
+        document.getElementById("contactCellNumber").style.display = 'none';
+        document.getElementById("contactEmail").style.display = 'none';
+        document.getElementById("done").style.display = 'none';
+        document.getElementById("cancel-modifier").style.display = 'none';
+
+        document.getElementById("contactFirstName").value = ''
+        document.getElementById("contactLastName").value = '';
+        document.getElementById("contactCellNumber").value = '';
+        document.getElementById("contactEmail").value = '';
+
+        document.getElementById("first-name").style.display = 'block';
+        document.getElementById("last-name").style.display = 'block';
+        document.getElementById("Phonedisplay").style.display = 'block';
+        document.getElementById("Emaildisplay").style.display = 'block';
+        document.getElementById("delete-modifier").style.display = 'block';
+        document.getElementById("edit-modifier").style.display = 'block';
+
+    }

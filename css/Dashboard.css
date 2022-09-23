@@ -1,0 +1,309 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 45px 5%;
+}
+
+#title 
+{
+    font-family: 'Trebuchet MS';
+    letter-spacing: 7px;
+    transform: scale(1.2, 1);
+    color: #000000;
+    padding-left: 3%;
+}
+
+/* CHANGE COLOR TO BLACK WHEN FUNCTIONALITY IS GOOD */
+#userName
+{
+    color: #ff5900;;
+}
+
+span
+{
+    color: #ff5900;
+}
+
+li
+{
+    display: inline-block;
+    padding: 0px 20px;
+    font-size: 100%;
+    /* font-family: Inter-Thin; */
+}
+
+.logoutButton
+{
+    background-color: #000000;
+    border:#000000;
+    color: #ffffff;
+    width: 150px;
+    text-align: center;
+    font-size: 15px;
+    padding: 8px;
+}
+
+.logoutButton:hover
+{
+    color: #000000;
+    background-color: rgba(255, 122, 45, 0.693);
+}
+
+body 
+{
+    background-color: rgba(208, 16, 16, 0);
+    height: fit-content;
+}
+
+.container
+{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: auto;
+    padding: 15px;
+    margin-top: 0%;
+}
+
+#search
+{
+    background-color: rgba(185, 85, 29, 0.1);
+    box-shadow: 0px 2px 2px 0px rgb(208, 207, 207);
+    position: relative;
+    padding-top: 0%;
+    padding-bottom: 45%;
+    padding-left: 20%;
+    padding-right: 15%;
+}
+
+.accessUIDiv 
+{
+    display: inline-flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    right: 5%;
+    width: auto;
+    height: 5%;
+    background-color: rgba(0, 217, 255, 0);
+}
+
+#searchText
+{
+    width: 80%;
+    padding-left: 5%;
+    background-color: #ffffff;
+    border: #00000000;
+    border-radius: 5px;
+    box-shadow: 0px 1px 1px 0px rgba(162, 162, 162, 0.639); 
+}
+
+#addContact
+{
+    box-shadow: 0px 1px 1px 0px rgba(162, 162, 162, 0.639); 
+}
+
+.addButton
+{
+    display: list-item;
+    padding-top: 10px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+    padding-right: 10px; 
+    border-radius: 5px;
+}
+
+.addButton:hover
+{
+    background-color: rgba(255, 122, 45, 0.693);
+    color: #ffffff;
+    opacity: 100%;
+}
+
+#separator
+{
+    /* border: 1px solid rgb(0, 255, 60); */
+    position: relative;
+    padding-top: 0%;
+    padding-bottom: 45%;
+    padding-left: 2%;
+    padding-right: 0%;
+}
+
+#contact
+{
+    position: relative;
+    padding-top: 0%;
+    padding-bottom: 45%;
+    padding-left: 35%;
+    padding-right: 20%;
+    box-shadow: 1px 1px 2px 1px rgb(208, 207, 207);
+}
+
+#contact-header
+{
+    display: inline-flex;
+    /* justify-content: space-between; */
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    width: auto;
+    height: 34%;
+    margin: 10%;
+    background-color: rgba(0, 217, 255, 0);
+    align-items: center;
+}
+
+#contact-picture
+{
+    display: flex;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    background-color: rgba(185, 85, 29, 0.1);
+    box-shadow: 0px 2px 2px 0px rgb(208, 207, 207);
+    text-align: center;
+}
+
+#complete-name
+{
+    padding-left: 15%;
+    letter-spacing: 5px;
+    font-size: 200%;
+    display: flex;
+    color: rgb(0, 0, 0);
+}
+
+#last-name
+{
+    padding-left: 10%;
+    /* display: inline-block; */
+}
+
+#contact-info
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10%;
+    top: 40%;
+    left: 0%;
+    right: 0%;
+    bottom: 15%;
+    position: absolute;
+}
+
+#line1
+{
+    margin-top: 2%;
+    border: solid #000;
+    border-width: 0px 0px 1px 0px;
+}
+
+#line2
+{
+    margin-top: 2%;
+    border: solid #000;
+    border-width: 0px 0px 1px 0px;
+}
+
+#line3
+{
+    margin-top: 2%;
+    border: solid #000;
+    border-width: 0px 0px 1px 0px;
+}
+
+#contact-buttons 
+{
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 7%;
+    position: absolute;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.buttons 
+{
+    background-color: rgb(0, 0, 0);
+    border: #000000;
+    color: #ffffff;
+    width: 150px;
+    text-align: center;
+    font-size: 15px;
+    padding: 8px;
+}
+
+.buttons:hover
+{
+    background-color: rgba(255, 122, 45, 0.693);
+    color: #000000;
+    opacity: 100%;
+}
+
+#cancel-modifier {
+    display : none;
+}
+
+#edit-buttons
+{
+    display: inline-flex;
+}
+
+#done 
+{
+    display: none;
+}
+#first-namep {
+    font-size: initial; 
+    letter-spacing: 0; 
+}
+#last-namep {
+    font-size: initial;
+    letter-spacing: 0; 
+    padding-left: 10%;
+}
+.cancel-button
+{
+    width: 150px;
+    text-align: center;
+    font-size: 15px;
+    padding: 8px;
+    background-color: #ffffff;
+    border: solid #000;
+    border-width: 1px 1px;
+}
+.cancel-button:hover
+{
+    background-color: rgba(255, 122, 45, 0.693);
+    color: #000000;
+    opacity: 100%;
+}
+
+/*not hidden*/
+.edit-button
+{
+    background-color: #c76c6c;
+}
+
+.hidden{
+    display: none;
+}
+

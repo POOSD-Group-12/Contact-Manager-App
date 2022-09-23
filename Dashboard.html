@@ -1,40 +1,162 @@
+<!DOCTYPE HTML>
 <html>
+
 <head>
-	<title>COP 4331 LAMP Stack Demo</title>
-	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
+    <script type="text/javascript" src="js/code.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Dashboard.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-	
-	<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() 
-	{
-		readCookie();
-	}, false);
-	</script>
-	
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            readCookie();
+            searchContact();
+        }, false);
+    </script>
+
 </head>
+
+<header>
+
+    <h1 id="title">CONTACT MANAGER</h1>
+    
+    <nav>
+        <li id="welcome"><i>Welcome, <span id="userName">Firstname</span>!</i></li>
+    </nav>
+
+    <button type="buttons" id="logoutButton" class="logoutButton" onclick="doLogout();"> Log Out</button>
+    
+</header>
+
 <body>
 
-<h1 id="title">COP 4331 LAMP Stack Demo</h1>
+        <div class="container">
 
-<div id="loggedInDiv">
-	<span id="userName"></span><br />
-	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
-</div>
+            <div id="search">
 
-<div id="accessUIDiv">
-	<br />
+                <div class="accessUIDiv">
+                    <br>
+                    <input type="text" id="searchText" placeholder="Search" onkeypress="searchContact(event);">
 
-	<input type="text" id="searchText" placeholder="Color To Search For"/>
-	<button type="button" id="searchColorButton" class="buttons" onclick="searchColor();"> Search Color </button><br />
-	<span id="colorSearchResult"></span>
-	<p id="colorList">
-	</p><br /><br />
+                    <span id="SearchResult"></span>
 
-	<input type="text" id="colorText" placeholder="Color To Add">
-	<button type="button" id="addColorButton" class="buttons" onclick="addColor();"> Add Color </button><br />
-	<span id="colorAddResult"></span>
-</div>
+                    <input type="image" class="addButton" id="addContact" onclick="addContactWrapper();" src="/images/addSymbol.png" alt="Add">
+                    <br>
+                </div>
 
-</body>
+                 <!-- create a modal for this-->
+                <!-- <section id="display-contacts">
+                    <div id="">
+                        <span id="selected-contact"></span>
+                        <h3 id="default-selector">select a contact or add one</h3>
+                        <span id="first-name">he</span><span id="last-name">he</span>
+                        <input id="contactFirstName" placeholder="first" class="hidden">
+                        <input id="contactLastName" placeholder="last" class="hidden">
+
+                    </div>
+
+                    <button id="done" class="hidden" onclick="addContact();">Done</button>
+
+                    <button id="cancel" class="hidden" onclick="toggleAddOff();">Cancel</button>
+
+                    <div id="contact-success">
+
+                        <span id="contactAddResult"></span>
+
+                    </div>
+
+                </section> -->
+
+            </div>
+
+            <div id="separator"></div>
+
+            <div id="contact">
+
+                <div id="contact-header">
+
+                    <div id="contact-picture"></div>
+
+                    <div id="complete-name">
+
+                        <p class = "hidden" id="first-namep">first name: </p>
+                        <div id="first-name">First</div>
+                        <input id="contactFirstName" class="hidden" placeholder="first name">
+
+                        <p class = "hidden" id="last-namep">Last name: </p>
+                        <div id="last-name">Last</div>
+                        <input id="contactLastName" class="hidden" placeholder="last name">
+
+                    </div>
+
+                </div>
+
+                 <!--only input or span can be displayed once, they need to be swapped depending on add or display, show both on edit-->
+                <!-- Contact info -->
+                <div id="contact-info">
+
+                    <div id="info1">
+
+                        <div id="Phone">
+                            <label>Phone:</label>
+                            <input id="contactCellNumber" class="hidden" placeholder="phone number" onkeypress="phonechecker();">
+                            <span id="Phonedisplay">(123) 456-7890</span>
+                        </div>
+
+                        <div id="line1"></div>
+
+                    </div>
+
+                    <div id="info2">
+
+                        <div id="email">
+                            <label>Email:</label>
+                            <input id="contactEmail" class="hidden" placeholder="email" type="email" onkeypress="emailchecker();">
+                            <span id="Emaildisplay">firstlast@icloud.com</span>
+                        </div>
+
+                        <div id="line2"></div>
+
+                    </div>
+
+                    <div id="info3">
+
+                        <div id="Address">
+                            <label>Address:</label>
+                            <input id=" Address-input " class="hidden ">
+                            <span id="Address">1234 ST Ave STREET</span>
+                        </div>
+
+                        <div id="line3"></div>
+                        
+                    </div>
+
+                </div>
+
+                <!--query first contact when nothing else is selected or add a contact if there is none-->
+                <div id="contact-buttons">
+
+                    <button type="button" id="delete-modifier" class="buttons" onclick="deleteContact();">Delete</button><br />
+                    <span id="colorAddResult"></span>
+
+                    <button type="button" id="done" class="buttons" onclick="checkAddorEdit();">Done</button><br />
+
+                    <div id="edit-buttons">
+
+                        <button type="cancel-button" id="cancel-modifier" class="cancel-button" onclick="cancelChanges();">Cancel</button><br />
+                        <span id="colorAddResult"></span>
+
+                        <button type="button" id="edit-modifier" class="buttons" onclick="editContactWrapper();">Edit</button><br />
+                        <span id="colorAddResult"></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+
 </html>

@@ -19,13 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: deploy-app
-        uses: garygrossgarten/github-action-ssh@v0.6.3
+        uses: SamKirkland/web-deploy@v1
         with:
-          command: cd /var/www/html/
-                   git clone git@github.com:POOSD-Group-12/Contact-Manager-App.git .
-                   
-          host: ${{secrets.SSH_HOST}}
-          username: ${{secrets.SSH_USERNAME}}
-          privateKey:: ${{secrets.SSH_KEY}}
-
-
+          target-server: ${{secrets.SSH_HOST}}
+          remote-user: ${{secrets.SSH_USERNAME}}
+          private-ssh-key: ${{secrets.SSH_KEY}}
+          destination-path: ~/var/www/html/
