@@ -35,7 +35,11 @@
 		  $stmt->close();
 		  $conn->close();
    
+<<<<<<< HEAD
 		  returnWithInfo($FirstName, $LastName, $Login, $Password, 0;
+=======
+		  returnWithInfo($FirstName, $LastName, $Login, $Password, 0);
+>>>>>>> 9e5c0e0ad9a1ba81be0c2d35ce56df7394c6539a
     }
   }
 
@@ -53,7 +57,11 @@
   function returnWithError( $err )
   {
 
+<<<<<<< HEAD
     $retValue = '{"error":"' . $err . '"}';
+=======
+    $retValue = '{"Error":"' . $err . '"}';
+>>>>>>> 9e5c0e0ad9a1ba81be0c2d35ce56df7394c6539a
     sendResultInfoAsJson( $retValue );
   }
 	
