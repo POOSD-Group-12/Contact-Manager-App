@@ -6,7 +6,7 @@
     let lastName = "";
     let boolAdd = 0;
     let boolEdit = 0;
-
+    let booldefaultSearch = true;
     function doRegister() {
 
         let firstName = document.getElementById("registerFirstName").value;
@@ -188,7 +188,8 @@
     {
         //default
         let srch = "";
-        if (event.keyCode != 13) {
+        if (event.keyCode != 13 && booldefaultSearch === false) {
+            booldefaultSearch = false;
             return
         }
         srch = document.getElementById("searchText").value;
@@ -213,15 +214,17 @@
                 {
                     document.getElementById("SearchResult").innerHTML = "Contact(s) has been retrieved";
                     let jsonObject = JSON.parse(xhr.responseText);
-
+                    console.log(jsonObject.results)
                     for (let i = 0; i < jsonObject.results.length; i++) {
-                        contactList += jsonObject.results[i];
+                        contactList += jsonObject.results[i].FirstName;
+                        contactList += "    "
+                        contactList += jsonObject.results[i].LastName;
                         if (i < jsonObject.results.length - 1) {
                             contactList += "<br />\r\n";
                         }
                     }
 
-                    document.getElementsById("SearchResult").innerHTML = contactList;
+                    document.getElementById("SearchResult").innerHTML = contactList;
                 }
             };
 
@@ -229,7 +232,7 @@
         } catch (err) {
             document.getElementById("contactSearchResult").innerHTML = err.message;
         }
-
+        document.getElementById("searchText") = "";
     }
 
     function editContact() {
