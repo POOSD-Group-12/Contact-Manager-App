@@ -23,7 +23,7 @@
     if( $row = $result->fetch_assoc() )
     {
       // Returns with an error since that login name is already taken
-      returnWithError("User with the login provided already exists.");
+      returnWithError("1");
       $stmt->close();
     }
     else
@@ -31,7 +31,7 @@
       //insert new user to database 
   		$stmt = $conn->prepare("INSERT into Users (FirstName,LastName,Login,Password) VALUES(?,?,?,?)");
 		  $stmt->bind_param("ssss", $FirstName, $LastName, $Login, $Password);
-		  $var = $stmt->execute();
+		  $stmt->execute();
 		  $stmt->close();
 		  $conn->close();
    
