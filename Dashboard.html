@@ -1,32 +1,34 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <script type="text/javascript" src="js/code.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/Dashboard.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
-        <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', function() {
-                readCookie();
-            }, false);
-        </script>
+<head>
+    <script type="text/javascript" src="js/code.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Dashboard.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
-    </head>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            readCookie();
+            searchContact();
+        }, false);
+    </script>
 
-    <header>
+</head>
 
-        <h1 id="title">CONTACT MANAGER</h1>
-        
-        <nav>
-            <li id="welcome"><i>Welcome, <span id="userName">Firstname</span>!</i></li>
-        </nav>
+<header>
 
-        <button type="buttons" id="logoutButton" class="logoutButton" onclick="doLogout();"> Log Out</button>
-        
-    </header>
+    <h1 id="title">CONTACT MANAGER</h1>
+    
+    <nav>
+        <li id="welcome"><i>Welcome, <span id="userName">Firstname</span>!</i></li>
+    </nav>
 
-    <body>
+    <button type="buttons" id="logoutButton" class="logoutButton" onclick="doLogout();"> Log Out</button>
+    
+</header>
+
+<body>
 
         <div class="container">
 
