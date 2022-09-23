@@ -6,6 +6,7 @@
     let lastName = "";
     let boolAdd = 0;
     let boolEdit = 0;
+
     function doRegister() {
 
         let firstName = document.getElementById("registerFirstName").value;
@@ -32,15 +33,13 @@
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     let jsonObject = JSON.parse(xhr.responseText);
-                    error = jsonObject.error;
-                    console.log(error)
+                    error = jsonObject.Error;
 
-                    if (jsonObject.Status == 1){
+                    if (error != 0) {
+                        document.getElementById("registerResult").innerHTML = "Username is taken; choose another username";
+                        return;
+                    } else {
                         document.getElementById("registerResult").innerHTML = "Account successfully created";
-                    }
-                    else {
-                        document.getElementById("registerResult").innerHTML = error;
-                        return;                    
                     }
 
                     //saveCookie(firstName, lastName, userId); //take user information and reroute them to dashboard
@@ -51,7 +50,7 @@
 
             xhr.send(jsonPayload);
         } catch (err) {
-            document.getElementById("registerResult").innerHTML = err.message;
+            document.getElementById("registerResult").innerHTML = error;
         }
 
     }
