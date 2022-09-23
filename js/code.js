@@ -32,13 +32,15 @@
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     let jsonObject = JSON.parse(xhr.responseText);
-                    error = jsonObject.Error;
+                    error = jsonObject.error;
+                    console.log(error)
 
-                    if (error != 0) {
-                        document.getElementById("registerResult").innerHTML = "Username is taken; choose another username";
-                        return;
-                    } else {
+                    if (jsonObject.Status == 1){
                         document.getElementById("registerResult").innerHTML = "Account successfully created";
+                    }
+                    else {
+                        document.getElementById("registerResult").innerHTML = error;
+                        return;                    
                     }
 
                     //saveCookie(firstName, lastName, userId); //take user information and reroute them to dashboard
@@ -144,7 +146,7 @@
         }
 
     }
-    
+
     //done
     function addContact() {
 
@@ -177,6 +179,7 @@
             xhr.send(jsonPayload);
         } catch (err) {
             console.log(err)
+            //modal for error display
         }
         toggleAddOff();
         boolAdd = 0;
@@ -334,7 +337,17 @@
         boolAdd = 0;
     }
 
+    function emailchecker(){
+
+    }
+    
+    function phonechecker(){
+
+    }
     function toggleAdd() {
+        document.getElementById("first-namep").style.display = 'block';
+        document.getElementById("last-namep").style.display = 'block';
+
         document.getElementById("contactFirstName").style.display = 'block';
         document.getElementById("contactLastName").style.display = 'block';
         document.getElementById("contactCellNumber").style.display = 'block';
@@ -353,6 +366,9 @@
     }
 
     function toggleAddOff() {
+        document.getElementById("first-namep").style.display = 'none';
+        document.getElementById("last-namep").style.display = 'none';
+
         document.getElementById("contactFirstName").style.display = 'none'
         document.getElementById("contactLastName").style.display = 'none';
         document.getElementById("contactCellNumber").style.display = 'none';
