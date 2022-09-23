@@ -40,7 +40,7 @@
 
                     <span id="SearchResult"></span>
 
-                    <input type="image" class="addButton" id="addContact" onclick="addContact();" src="/images/addSymbol.png" alt="Add">
+                    <input type="image" class="addButton" id="addContact" onclick="addContactWrapper();" src="/images/addSymbol.png" alt="Add">
                     <br>
                 </div>
 
@@ -79,9 +79,13 @@
 
                     <div id="complete-name">
 
+                        <p class = "hidden" id="first-namep">first name: </p>
                         <div id="first-name">First</div>
+                        <input id="contactFirstName" class="hidden" placeholder="first name">
 
+                        <p class = "hidden" id="last-namep">Last name: </p>
                         <div id="last-name">Last</div>
+                        <input id="contactLastName" class="hidden" placeholder="last name">
 
                     </div>
 
@@ -95,7 +99,7 @@
 
                         <div id="Phone">
                             <label>Phone:</label>
-                            <input id="contactCellNumber" class="hidden" placeholder="phone number">
+                            <input id="contactCellNumber" class="hidden" placeholder="phone number" onkeypress="phonechecker();">
                             <span id="Phonedisplay">(123) 456-7890</span>
                         </div>
 
@@ -107,7 +111,7 @@
 
                         <div id="email">
                             <label>Email:</label>
-                            <input id="contactEmail" class="hidden" placeholder="email">
+                            <input id="contactEmail" class="hidden" placeholder="email" type="email" onkeypress="emailchecker();">
                             <span id="Emaildisplay">firstlast@icloud.com</span>
                         </div>
 
@@ -135,12 +139,14 @@
                     <button type="button" id="delete-modifier" class="buttons" onclick="deleteContact();">Delete</button><br />
                     <span id="colorAddResult"></span>
 
+                    <button type="button" id="done" class="buttons" onclick="checkAddorEdit();">Done</button><br />
+
                     <div id="edit-buttons">
 
                         <button type="cancel-button" id="cancel-modifier" class="cancel-button" onclick="cancelChanges();">Cancel</button><br />
                         <span id="colorAddResult"></span>
 
-                        <button type="button" id="edit-modifier" class="buttons" onclick="editContact();">Edit</button><br />
+                        <button type="button" id="edit-modifier" class="buttons" onclick="editContactWrapper();">Edit</button><br />
                         <span id="colorAddResult"></span>
 
                     </div>

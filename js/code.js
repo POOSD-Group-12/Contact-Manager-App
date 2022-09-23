@@ -4,7 +4,8 @@
     let userId = 0;
     let firstName = "";
     let lastName = "";
-
+    let boolAdd = 0;
+    let boolEdit = 0;
     function doRegister() {
 
         let firstName = document.getElementById("registerFirstName").value;
@@ -31,13 +32,15 @@
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     let jsonObject = JSON.parse(xhr.responseText);
-                    error = jsonObject.Error;
+                    error = jsonObject.error;
+                    console.log(error)
 
-                    if (error != 0) {
-                        document.getElementById("registerResult").innerHTML = "Username is taken; choose another username";
-                        return;
-                    } else {
+                    if (jsonObject.Status == 1){
                         document.getElementById("registerResult").innerHTML = "Account successfully created";
+                    }
+                    else {
+                        document.getElementById("registerResult").innerHTML = error;
+                        return;                    
                     }
 
                     //saveCookie(firstName, lastName, userId); //take user information and reroute them to dashboard
@@ -143,7 +146,8 @@
         }
 
     }
-    //not api working
+
+    //done
     function addContact() {
 
         let newContactFirstName = document.getElementById("contactFirstName").value;
@@ -153,7 +157,7 @@
         let newUserID = userId //will need to take the next available user ID available, then should hopefully be done
 
 
-        document.getElementById("contactAddResult").innerHTML = "";
+        //document.getElementById("contactAddResult").innerHTML = "";
 
         let tmp = { FirstName: newContactFirstName, LastName: newContactLastName, Phone: newContactCellNumber, Email: newContactEmail, UserID: newUserID };
         let jsonPayload = JSON.stringify(tmp);
@@ -167,16 +171,18 @@
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     let jsonObject = JSON.parse(xhr.responseText);
-                    document.getElementById("contactAddResult").innerHTML = jsonObject.Status;
+                    //document.getElementById("contactAddResult").innerHTML = jsonObject.Status;
+                    //use the modal to show that error or if it was successful
                 }
             };
 
             xhr.send(jsonPayload);
         } catch (err) {
             console.log(err)
+            //modal for error display
         }
         toggleAddOff();
-
+        boolAdd = 0;
     }
 
     function searchContact(event) //not completed; need to study and ensure understanding of how it works
@@ -228,12 +234,12 @@
     }
 
     function editContact() {
-        toggleAdd();
+
         let curContactFirstName = document.getElementById("contactFirstName").value;
         let curContactLastName = document.getElementById("contactLastName").value;
         let curContactCellNumber = document.getElementById("contactCellNumber").value;
         let curContactEmail = document.getElementById("contactEmail").value;
-        let curContactid = document.getElementById("contactUserID").value; //will need to take the current user ID for the contact that's being edited
+        //let curContactid = document.getElementById("contactUserID").value; //will need to take the current user ID for the contact that's being edited
 
         document.getElementById("contactEditResult").innerHTML = "";
 
@@ -265,13 +271,14 @@
         } catch (err) {
             document.getElementById("contactEditResult").innerHTML = err.message;
         }
-
+        toggleAddOff();
+        boolEdit = 0;
     }
 
     function deleteContact() //not completed; need to ensure a particular user ID and its content are deleted from a contact list
     {
     
-        let ContactIDToDelete = document.getElementById("contactUserID").value; //will need to get the user ID for the contact being deleted
+        //let ContactIDToDelete = document.getElementById("contactUserID").value; //will need to get the user ID for the contact being deleted
 
         //create modal asking are you sure
         alert("you are about to delete");
@@ -292,7 +299,7 @@
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     //should check if the contact still exists
-                    document.getElementById("contactDeletedResult").innerHTML = "Contact has been deleted";
+                    alert("contact deleted!")
                 }
             };
 
@@ -303,13 +310,50 @@
 
     }
 
+    function checkAddorEdit(){
+        // 1 means that in add or edit mode which enables the done button for that specific mode
+        if (boolAdd == 1) {
+            addContact();
+        }
+
+        else if(boolEdit == 1) {
+            editContact();
+        }
+    }
+    
+    function addContactWrapper() {
+        boolAdd = 1;
+        toggleAdd();
+    }
+
+    function editContactWrapper() {
+        boolEdit = 1;
+        toggleAdd();
+    }
+
+    function cancelChanges() {
+        toggleAddOff()
+        boolEdit = 0;
+        boolAdd = 0;
+    }
+
+    function emailchecker(){
+
+    }
+    
+    function phonechecker(){
+
+    }
     function toggleAdd() {
+        document.getElementById("first-namep").style.display = 'block';
+        document.getElementById("last-namep").style.display = 'block';
+
         document.getElementById("contactFirstName").style.display = 'block';
         document.getElementById("contactLastName").style.display = 'block';
         document.getElementById("contactCellNumber").style.display = 'block';
         document.getElementById("contactEmail").style.display = 'block';
         document.getElementById("done").style.display = 'block';
-        document.getElementById("cancel").style.display = 'block';
+        document.getElementById("cancel-modifier").style.display = 'block';
 
         document.getElementById("first-name").style.display = 'none';
         document.getElementById("last-name").style.display = 'none';
@@ -322,12 +366,15 @@
     }
 
     function toggleAddOff() {
+        document.getElementById("first-namep").style.display = 'none';
+        document.getElementById("last-namep").style.display = 'none';
+
         document.getElementById("contactFirstName").style.display = 'none'
         document.getElementById("contactLastName").style.display = 'none';
         document.getElementById("contactCellNumber").style.display = 'none';
         document.getElementById("contactEmail").style.display = 'none';
         document.getElementById("done").style.display = 'none';
-        document.getElementById("cancel").style.display = 'none';
+        document.getElementById("cancel-modifier").style.display = 'none';
 
         document.getElementById("contactFirstName").value = ''
         document.getElementById("contactLastName").value = '';
