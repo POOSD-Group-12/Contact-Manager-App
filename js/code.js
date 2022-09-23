@@ -216,10 +216,12 @@
                     let jsonObject = JSON.parse(xhr.responseText);
                     console.log(jsonObject.results)
                     for (let i = 0; i < jsonObject.results.length; i++) {
+                        contactList += '<span class ="contact-selectors">'
                         contactList += jsonObject.results[i].FirstName;
                         contactList += "    "
                         contactList += jsonObject.results[i].LastName;
                         if (i < jsonObject.results.length - 1) {
+                            contactList += '</span>'
                             contactList += "<br />\r\n";
                         }
                     }
