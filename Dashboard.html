@@ -1,104 +1,154 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+    <head>
+        <script type="text/javascript" src="js/code.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/Dashboard.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
-<head>
-    <script type="text/javascript" src="js/code.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/Dashboard.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                readCookie();
+            }, false);
+        </script>
 
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            readCookie();
-            searchContact();
-        }, false);
-    </script>
+    </head>
 
-</head>
+    <header>
 
-<header>
-
-    <nav>
         <h1 id="title">CONTACT MANAGER</h1>
-        <ul>
+        
+        <nav>
             <li id="welcome"><i>Welcome, <span id="userName">Firstname</span>!</i></li>
-            <li><button type="buttons" id="logoutButton" class="logoutButton" onclick="doLogout();"> Log Out</button></li>
-        </ul>
-    </nav>
-    
-</header>
+        </nav>
 
-<body>
+        <button type="buttons" id="logoutButton" class="logoutButton" onclick="doLogout();"> Log Out</button>
+        
+    </header>
 
-    <section id="dash">
+    <body>
 
-        <section id="search">
-            <div id="accessUIDiv">
-                <br />
+        <div class="container">
 
-                <input type="text" id="searchText" placeholder="Search" onkeypress="searchContact(event);" />
-                <!--<button type="button" id="searchContact" class="buttons" onclick="searchContact();"> search icon </button><br />-->
-                <span id="SearchResult"></span>
+            <div id="search">
 
-                <button type="button" id="addContact" class="buttons" onclick="toggleAdd();"> Add Contact </button><br />
+                <div class="accessUIDiv">
+                    <br>
+                    <input type="text" id="searchText" placeholder="Search" onkeypress="searchContact(event);">
+
+                    <span id="SearchResult"></span>
+
+                    <input type="image" class="addButton" id="addContact" onclick="addContact();" src="/images/addSymbol.png" alt="Add">
+                    <br>
+                </div>
+
+                 <!-- create a modal for this-->
+                <!-- <section id="display-contacts">
+                    <div id="">
+                        <span id="selected-contact"></span>
+                        <h3 id="default-selector">select a contact or add one</h3>
+                        <span id="first-name">he</span><span id="last-name">he</span>
+                        <input id="contactFirstName" placeholder="first" class="hidden">
+                        <input id="contactLastName" placeholder="last" class="hidden">
+
+                    </div>
+
+                    <button id="done" class="hidden" onclick="addContact();">Done</button>
+
+                    <button id="cancel" class="hidden" onclick="toggleAddOff();">Cancel</button>
+
+                    <div id="contact-success">
+
+                        <span id="contactAddResult"></span>
+
+                    </div>
+
+                </section> -->
 
             </div>
 
-        </section>
+            <div id="separator"></div>
 
-        <section id="contact">
-            <!--query first contact when nothing else is selected or add a contact if there is none-->
-            <div id="contact-buttons">
+            <div id="contact">
 
-                <button type="button" id="delete-modifier" class="buttons" onclick="deleteContact();"> Delete Contact </button><br />
-                <span id="colorAddResult"></span>
+                <div id="contact-header">
 
-                <button type="button" id="edit-modifier" class="buttons" onclick="editContact();"> Edit Contact </button><br />
-                <span id="colorAddResult"></span>
+                    <div id="contact-picture"></div>
+
+                    <div id="complete-name">
+
+                        <div id="first-name">First</div>
+
+                        <div id="last-name">Last</div>
+
+                    </div>
+
+                </div>
+
+                 <!--only input or span can be displayed once, they need to be swapped depending on add or display, show both on edit-->
+                <!-- Contact info -->
+                <div id="contact-info">
+
+                    <div id="info1">
+
+                        <div id="Phone">
+                            <label>Phone:</label>
+                            <input id="contactCellNumber" class="hidden" placeholder="phone number">
+                            <span id="Phonedisplay">(123) 456-7890</span>
+                        </div>
+
+                        <div id="line1"></div>
+
+                    </div>
+
+                    <div id="info2">
+
+                        <div id="email">
+                            <label>Email:</label>
+                            <input id="contactEmail" class="hidden" placeholder="email">
+                            <span id="Emaildisplay">firstlast@icloud.com</span>
+                        </div>
+
+                        <div id="line2"></div>
+
+                    </div>
+
+                    <div id="info3">
+
+                        <div id="Address">
+                            <label>Address:</label>
+                            <input id=" Address-input " class="hidden ">
+                            <span id="Address">1234 ST Ave STREET</span>
+                        </div>
+
+                        <div id="line3"></div>
+                        
+                    </div>
+
+                </div>
+
+                <!--query first contact when nothing else is selected or add a contact if there is none-->
+                <div id="contact-buttons">
+
+                    <button type="button" id="delete-modifier" class="buttons" onclick="deleteContact();">Delete</button><br />
+                    <span id="colorAddResult"></span>
+
+                    <div id="edit-buttons">
+
+                        <button type="cancel-button" id="cancel-modifier" class="cancel-button" onclick="cancelChanges();">Cancel</button><br />
+                        <span id="colorAddResult"></span>
+
+                        <button type="button" id="edit-modifier" class="buttons" onclick="editContact();">Edit</button><br />
+                        <span id="colorAddResult"></span>
+
+                    </div>
+
+                </div>
+
             </div>
 
+        </div>
 
-            <!-- create a modal for this-->
-            <section id="display-contacts">
-                <div id="">
-                    <span id="selected-contact"></span>
-                    <h3 id="default-selector">select a contact or add one</h3>
-                    <span id="first-name">he</span><span id="last-name">he</span>
-                    <input id="contactFirstName" placeholder="first" class="hidden">
-                    <input id="contactLastName" placeholder="last" class="hidden">
-
-                </div>
-
-                </div id="contact-picture">
-
-                <!--only input or span can be displayed once, they need to be swapped depending on add or display,
-                         show both on edit-->
-                <div id="Phone">
-                    <label>Phone:</label>
-                    <input id="contactCellNumber" class="hidden" placeholder="phone number">
-                    <span id="Phonedisplay">4000</span>
-                </div>
-                <div id="email">
-                    <label>Email:</label>
-                    <input id="contactEmail" class="hidden" placeholder="email">
-                    <span id="Emaildisplay">4000</span>
-                </div>
-                <div id="Address">
-                    <label>Address:</label>
-                    <input id=" Address-input " class="hidden ">
-                    <span id="Address ">4000</span>
-                </div>
-                <button id="done" class="hidden" onclick="addContact();">Done</button>
-                <button id="cancel" class="hidden" onclick="toggleAddOff();">Cancel</button>
-                </div>
-
-                <div id="contact-success">
-                    <span id="contactAddResult"></span>
-                </div>
-            </section>
-
-        </section>
-
-</body>
+    </body>
 
 </html>
