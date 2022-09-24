@@ -7,7 +7,8 @@ let lastName = "";
 let boolAdd = 0;
 let boolEdit = 0;
 let booldefaultSearch = true;
-let currentjson
+let currentjson;
+let currContactID;
 
 function doRegister() {
 
@@ -198,10 +199,10 @@ function searchContact(event) //not completed; need to study and ensure understa
 {
     //default
     let srch = "";
-    if (event.keyCode != 13 && booldefaultSearch === false) {
-        booldefaultSearch = false;
-        return
-    }
+    //if (event.keyCode != 13 && booldefaultSearch === false) {
+    //    booldefaultSearch = false;
+    //    return
+    //}
     srch = document.getElementById("searchText").value;
 
     let contactList = "";
@@ -231,9 +232,10 @@ function searchContact(event) //not completed; need to study and ensure understa
                     contactList += i;
                     contactList += ');">'
                         contactList += '<span class ="contact-selectors">'
-                        contactList += jsonObject.results[i].FirstName;
-                        contactList += "    "
+                        // IDK WHY BUT FIRST AND LAST NAME ARE SWAPPED
                         contactList += jsonObject.results[i].LastName;
+                        contactList += "    "
+                        contactList += jsonObject.results[i].FirstName;
                     contactList += '</span>'
                     contactList += '</button>'
                     if (i < jsonObject.results.length - 1) {
@@ -258,11 +260,11 @@ function editContact() {
     let curContactLastName = document.getElementById("contactLastName").value;
     let curContactCellNumber = document.getElementById("contactCellNumber").value;
     let curContactEmail = document.getElementById("contactEmail").value;
-    let newConcatName = newContactFirstName + " " + newContactLastName;
+    let newConcatName = curContactFirstName + " " + curContactLastName;
 
-    //let curContactid = document.getElementById("contactUserID").value; //will need to take the current user ID for the contact that's being edited
+    let curContactid = currentjson.results[currContactID].ContactID;//will need to take the current user ID for the contact that's being edited
 
-    document.getElementById("contactEditResult").innerHTML = "";
+    //document.getElementById("contactEditResult").innerHTML = "";
 
     let tmp = { 
         FirstName: curContactFirstName, 
@@ -285,13 +287,15 @@ function editContact() {
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 //need to change the contact information
-                document.getElementById("contactEditResult").innerHTML = "Contact has been changed";
+                //document.getElementById("contactEditResult").innerHTML = "Contact has been changed";
+                alert("Contact has been changedContact has been changed")
             }
         };
 
         xhr.send(jsonPayload);
     } catch (err) {
-        document.getElementById("contactEditResult").innerHTML = err.message;
+        //document.getElementById("contactEditResult").innerHTML = err.message;
+        alert(err)
     }
     toggleAddOff();
     boolEdit = 0;
@@ -300,11 +304,11 @@ function editContact() {
 function deleteContact() //not completed; need to ensure a particular user ID and its content are deleted from a contact list
 {
 
-    //let ContactIDToDelete = document.getElementById("contactUserID").value; //will need to get the user ID for the contact being deleted
+    let ContactIDToDelete = currentjson.results[currContactID].ContactID;
 
     //create modal asking are you sure
     alert("you are about to delete");
-    document.getElementById("contactDeleteResult").innerHTML = "";
+    //document.getElementById("contactDeleteResult").innerHTML = "";
 
     let tmp = {
         ContactID : ContactIDToDelete
@@ -327,7 +331,7 @@ function deleteContact() //not completed; need to ensure a particular user ID an
 
         xhr.send(jsonPayload);
     } catch (err) {
-        document.getElementById("contactDeletedResult").innerHTML = err.message;
+        //document.getElementById("contactDeletedResult").innerHTML = err.message;
     }
 
 }
@@ -368,10 +372,17 @@ function phonechecker(){
 }
 
 function display(i){
-    document.getElementById("first-name").innerHTML = currentjson.results[i].FirstName;
-    document.getElementById("last-name").innerHTML = currentjson.results[i].LastName;
+    //this value i, is the ith element is results[i] used when selecting for delete, edit
+    currContactID = i;
+    document.getElementById("first-name").innerHTML = currentjson.results[i].LastName;
+    document.getElementById("last-name").innerHTML =  currentjson.results[i].FirstName;
     document.getElementById("Phonedisplay").innerHTML = currentjson.results[i].Phone;
     document.getElementById("Emaildisplay").innerHTML = currentjson.results[i].Email;
+
+    document.getElementById("contactFirstName").placeholder = currentjson.results[i].LastName;
+    document.getElementById("contactLastName").placeholder = currentjson.results[i].FirstName;
+    document.getElementById("contactCellNumber").placeholder = currentjson.results[i].Phone;
+    document.getElementById("contactEmail").placeholder = currentjson.results[i].Email;
 
 }
 function toggleAdd() {
