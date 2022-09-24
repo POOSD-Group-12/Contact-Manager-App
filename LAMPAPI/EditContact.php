@@ -3,9 +3,10 @@
 	
   $FirstName = $inData["FirstName"];
   $LastName = $inData["LastName"];
+  $ConcatName = $inData["ConcatName"];
   $Phone = $inData["Phone"];
 	$Email = $inData["Email"];
-	$UserID = $inData["UserID"];
+	$ContactID = $inData["ContactID"];
  
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -17,19 +18,19 @@
 	{
 		
 		//check if contact exists
-    $stmt = $conn->prepare("SELECT * FROM Contacts WHERE UserID = ?");
-    $stmt->bind_param("s", $UserID);
+    $stmt = $conn->prepare("SELECT * FROM ContactsTestv2 WHERE ID = ?");
+    $stmt->bind_param("s", $ContactID);
     $stmt->execute();
     $result = $stmt->get_result();
     if( $row = $result->fetch_assoc() ) //If yes 
     {
-      $stmt = $conn->prepare("UPDATE Contacts SET LastName=?, FirstName=?, Phone=?, Email=? WHERE UserID=? ");
-		  $stmt->bind_param("sssss", $LastName, $FirstName, $Phone, $Email, $UserID);
+      $stmt = $conn->prepare("UPDATE ContactsTestv2 SET LastName=?, FirstName=?, ConcatName=?, Phone=?, Email=? WHERE ID=? ");
+		  $stmt->bind_param("ssssss", $LastName, $FirstName, $ConcatName, $Phone, $Email, $ContactID);
 		  $stmt->execute();
 		  $stmt->close();
 		  $conn->close();
 	  
-      returnWithInfo($FirstName, $LastName, $Phone, $Email, $UserID);
+      returnWithInfo( $LastName, $FirstName, $ConcatName, $Phone, $Email, $ContactID);
     }
     else
     {
@@ -53,13 +54,13 @@
 	
 	function returnWithError( $err )
 	{
-		$retValue = '{"error":"' . $err . '"}';
+		$retValue = '{"Error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
-function returnWithInfo( $FirstName, $LastName, $Phone, $Email, $UserID )
+function returnWithInfo(  $LastName, $FirstName, $ConcatName, $Phone, $Email, $ContactID )
 	{
-		$retValue = '{"UserID":"' . $UserID . '", "FirstName":"' . $FirstName . '","LastName":"' . $LastName . '","Phone":"' . $Phone . '","Email":"' . $Email . '", "Status":"UPDATED"}';
+		$retValue = '{"ContactID":"' . $ContactID . '", "FirstName":"' . $FirstName . '","LastName":"' . $LastName . '","ConcatName":"' . $ConcatName . '","Phone":"' . $Phone . '","Email":"' . $Email . '", "Status":"UPDATED"}';
 		sendResultInfoAsJson( $retValue );
 	}
  

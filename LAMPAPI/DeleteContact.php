@@ -2,7 +2,7 @@
 
 	$inData = getRequestInfo();
 	
-  	$UserID = $inData["UserID"];
+  	$ContactID = $inData["ContactID"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -11,23 +11,23 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE UserID = ?");
-    	$stmt->bind_param("s", $UserID);
+		$stmt = $conn->prepare("SELECT * FROM ContactsTestv2 WHERE ID = ?");
+    	$stmt->bind_param("s", $ContactID);
     	$stmt->execute();
     	$result = $stmt->get_result();
     	if( $row = $result->fetch_assoc() )
     	{
-      		$stmt = $conn->prepare("DELETE FROM Contacts WHERE UserID=? ");
-		  	$stmt->bind_param("s", $UserID);
+      		$stmt = $conn->prepare("DELETE FROM ContactsTestv2 WHERE ID=? ");
+		  	$stmt->bind_param("s", $ContactID);
 		  	$stmt->execute();
 		  	$stmt->close();
 		  	$conn->close();
 				
-      		returnWithInfo($UserID);
+      		returnWithInfo($ContactID);
     	}
     	else
     	{
-      		returnWithError("Contact with provided UserID does not exist.");
+      		returnWithError("Contact with provided ContactID does not exist.");
       		$stmt->close();
       		$conn->close();
     	}
@@ -52,7 +52,7 @@
 	
 	function returnWithInfo($UserID )
 	{
-		$retValue = '{"UserID":"' . $UserID . '", "Status":"Deleted"}';
+		$retValue = '{"ContactID":"' . $UserID . '", "Status":"Deleted"}';
 		sendResultInfoAsJson( $retValue );
 	}
 ?>

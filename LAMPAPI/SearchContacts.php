@@ -15,9 +15,9 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select * from ContactsTest where UserID = ? AND (FirstName like ? or LastName like ? or Phone like ? or Email like ?)  LIMIT $rate,10");
+		$stmt = $conn->prepare("select * from ContactsTestv2 where UserID = ? AND (FirstName like ? or LastName like ? or Phone like ? or Email like ? or ConcatName like ?)  LIMIT $rate,10");
 		$input = "%" . $inData["Search"] . "%";
-		$stmt->bind_param("sssss", $UserID, $input, $input, $input, $input);
+		$stmt->bind_param("ssssss", $UserID, $input, $input, $input, $input, $input);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
@@ -29,7 +29,7 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '{"UserID" : "' . $row["UserID"] . '", "FirstName" : "' . $row["FirstName"] . '", "LastName" : "' . $row["LastName"] . '", "Phone" : "' . $row["Phone"] . '", "Email" : "' . $row["Email"] . '" }';
+			$searchResults .= '{"UserID" : "' . $row["UserID"] . '", "ContactID" : "' . $row["ID"] . '", "FirstName" : "' . $row["FirstName"] . '", "LastName" : "' . $row["LastName"] . '", "ConcatName" : "' . $row["ConcatName"] . '", "Phone" : "' . $row["Phone"] . '", "Email" : "' . $row["Email"] . '" }';
 		}
 		
 		if( $searchCount == 0 )
@@ -58,13 +58,13 @@
 	
 	function returnWithError( $err )
 	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+		$retValue = '{"Error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
 	function returnWithInfo( $searchResults )
 	{
-		$retValue = '{"results":[' . $searchResults . '],"error":"0"}';
+		$retValue = '{"results":[' . $searchResults . '],"error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
