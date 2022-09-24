@@ -8,6 +8,7 @@ let boolAdd = 0;
 let boolEdit = 0;
 let booldefaultSearch = true;
 let currentjson
+
 function doRegister() {
 
     let firstName = document.getElementById("registerFirstName").value;
@@ -154,12 +155,20 @@ function addContact() {
     let newContactLastName = document.getElementById("contactLastName").value;
     let newContactCellNumber = document.getElementById("contactCellNumber").value;
     let newContactEmail = document.getElementById("contactEmail").value;
+    let newConcatName = newContactFirstName + " " + newContactLastName;
     let newUserID = userId //will need to take the next available user ID available, then should hopefully be done
 
 
     //document.getElementById("contactAddResult").innerHTML = "";
 
-    let tmp = { FirstName: newContactFirstName, LastName: newContactLastName, Phone: newContactCellNumber, Email: newContactEmail, UserID: newUserID };
+    let tmp = { 
+        FirstName: newContactFirstName, 
+        LastName: newContactLastName, 
+        Phone: newContactCellNumber, 
+        Email: newContactEmail, 
+        UserID: newUserID ,
+        ConcatName: newConcatName
+    };
     let jsonPayload = JSON.stringify(tmp);
 
     let url = urlBase + '/AddContact' + extension;
@@ -213,19 +222,19 @@ function searchContact(event) //not completed; need to study and ensure understa
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) //how do the contents of this function work?
             {
-                document.getElementById("SearchResult").innerHTML = "Contact(s) has been retrieved";
                 let jsonObject = JSON.parse(xhr.responseText);
-                console.log(jsonObject.results)
-                contactObject = jsonObject;
+                console.log(jsonObject)
+                currentjson = jsonObject;
                 for (let i = 0; i < jsonObject.results.length; i++) {
                     contactList += '<button class ="contact-buttons"';
-                    contactList += 'onclick(display(';
-                    contactList +=  contactObject, i;
-                    contactList += '));>';
+                    contactList += 'onclick="display('
+                    contactList += i;
+                    contactList += ');">'
                         contactList += '<span class ="contact-selectors">'
                         contactList += jsonObject.results[i].FirstName;
                         contactList += "    "
                         contactList += jsonObject.results[i].LastName;
+                    contactList += '</span>'
                     contactList += '</button>'
                     if (i < jsonObject.results.length - 1) {
                         contactList += "<br />\r\n";
@@ -249,6 +258,8 @@ function editContact() {
     let curContactLastName = document.getElementById("contactLastName").value;
     let curContactCellNumber = document.getElementById("contactCellNumber").value;
     let curContactEmail = document.getElementById("contactEmail").value;
+    let newConcatName = newContactFirstName + " " + newContactLastName;
+
     //let curContactid = document.getElementById("contactUserID").value; //will need to take the current user ID for the contact that's being edited
 
     document.getElementById("contactEditResult").innerHTML = "";
@@ -260,6 +271,7 @@ function editContact() {
         Email: curContactEmail, 
         UserID: userId,
         ContactID: curContactid,
+        ConcatName: newConcatName
     };
 
     let jsonPayload = JSON.stringify(tmp);
@@ -355,11 +367,11 @@ function phonechecker(){
 
 }
 
-function display(contactObject , i){
-    document.getElementById("first-name").innerHTML = contactObject.results[i].FirstName;
-    document.getElementById("last-name").innerHTML = contactObject.results[i].LastName;
-    document.getElementById("Phonedisplay").innerHTML = contactObject.results[i].Phone;
-    document.getElementById("Emaildisplay").innerHTML = contactObject.results[i].Email;
+function display(i){
+    document.getElementById("first-name").innerHTML = currentjson.results[i].FirstName;
+    document.getElementById("last-name").innerHTML = currentjson.results[i].LastName;
+    document.getElementById("Phonedisplay").innerHTML = currentjson.results[i].Phone;
+    document.getElementById("Emaildisplay").innerHTML = currentjson.results[i].Email;
 
 }
 function toggleAdd() {
