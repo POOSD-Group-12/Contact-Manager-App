@@ -22,15 +22,20 @@ header
     padding-left: 3%;
 }
 
+#welcome
+{
+    white-space:pre;
+}
+
 /* CHANGE COLOR TO BLACK WHEN FUNCTIONALITY IS GOOD */
 #userName
 {
-    color: #ff5900;;
+    color: #000000;;
 }
 
 span
 {
-    color: #ff5900;
+    color: #000000;
 }
 
 li
@@ -170,6 +175,7 @@ body
 #contact-picture
 {
     display: flex;
+    position: absolute;
     border-radius: 50%;
     width: 150px;
     height: 150px;
@@ -180,7 +186,7 @@ body
 
 #complete-name
 {
-    padding-left: 15%;
+    padding-left: 35%;
     letter-spacing: 5px;
     font-size: 200%;
     display: flex;
@@ -220,20 +226,12 @@ body
     border-width: 0px 0px 1px 0px;
 }
 
-#line3
-{
-    margin-top: 2%;
-    border: solid #000;
-    border-width: 0px 0px 1px 0px;
-}
-
 #contact-buttons 
 {
     bottom: 0%;
     left: 0%;
     right: 0%;
     margin-left: 10%;
-    margin-right: 10%;
     margin-bottom: 7%;
     position: absolute;
     display: inline-flex;
@@ -258,28 +256,69 @@ body
     opacity: 100%;
 }
 
-#cancel-modifier {
+#cancel-modifier 
+{
     display : none;
 }
 
-#edit-buttons
+/* #edit-buttons
 {
     display: inline-flex;
-}
+} */
 
 #done 
 {
     display: none;
 }
-#first-namep {
-    font-size: initial; 
-    letter-spacing: 0; 
-}
-#last-namep {
+
+#first-namep 
+{
+    margin-right: 2%;
     font-size: initial;
-    letter-spacing: 0; 
-    padding-left: 10%;
+    letter-spacing: 0;
 }
+
+#last-namep
+{
+    margin-right: 2%;
+    padding-left: 5%;
+    font-size: initial;
+    letter-spacing: 0;
+}
+
+#contactFirstName
+{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 2% 2%;
+    border-radius: 5px;
+    
+}
+
+#contactLastName
+{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 2% 2%;
+    border-radius: 5px;
+}
+
+#contactCellNumber
+{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 2% 2%;
+    border-radius: 5px;
+}
+
+#contactEmail
+{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 2% 2%;
+    border-radius: 5px;
+}
+
 .cancel-button
 {
     width: 150px;
@@ -307,7 +346,3 @@ body
     display: none;
 }
 
-//for the drop down list of contacts
-.contact-selectors {
-
-}
