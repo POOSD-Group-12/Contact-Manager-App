@@ -144,7 +144,7 @@ function readCookie() {
     if (userId < 0) {
         window.location.href = "index.html";
     } else {
-        document.getElementById("userName").innerHTML = "Hi, " + firstName + " " + lastName;
+        document.getElementById("userName").innerHTML = firstName + " " + lastName + "!";
     }
 
 }
@@ -162,12 +162,12 @@ function addContact() {
 
     //document.getElementById("contactAddResult").innerHTML = "";
 
-    let tmp = { 
-        FirstName: newContactFirstName, 
-        LastName: newContactLastName, 
-        Phone: newContactCellNumber, 
-        Email: newContactEmail, 
-        UserID: newUserID ,
+    let tmp = {
+        FirstName: newContactFirstName,
+        LastName: newContactLastName,
+        Phone: newContactCellNumber,
+        Email: newContactEmail,
+        UserID: newUserID,
         ConcatName: newConcatName
     };
     let jsonPayload = JSON.stringify(tmp);
@@ -189,7 +189,7 @@ function addContact() {
         xhr.send(jsonPayload);
     } catch (err) {
         console.log(err)
-        //modal for error display
+            //modal for error display
     }
     toggleAddOff();
     boolAdd = 0;
@@ -231,11 +231,11 @@ function searchContact(event) //not completed; need to study and ensure understa
                     contactList += 'onclick="display('
                     contactList += i;
                     contactList += ');">'
-                        contactList += '<span class ="contact-selectors">'
+                    contactList += '<span class ="contact-selectors">'
                         // IDK WHY BUT FIRST AND LAST NAME ARE SWAPPED
-                        contactList += jsonObject.results[i].LastName;
-                        contactList += "    "
-                        contactList += jsonObject.results[i].FirstName;
+                    contactList += jsonObject.results[i].LastName;
+                    contactList += "    "
+                    contactList += jsonObject.results[i].FirstName;
                     contactList += '</span>'
                     contactList += '</button>'
                     if (i < jsonObject.results.length - 1) {
@@ -262,15 +262,15 @@ function editContact() {
     let curContactEmail = document.getElementById("contactEmail").value;
     let newConcatName = curContactFirstName + " " + curContactLastName;
 
-    let curContactid = currentjson.results[currContactID].ContactID;//will need to take the current user ID for the contact that's being edited
+    let curContactid = currentjson.results[currContactID].ContactID; //will need to take the current user ID for the contact that's being edited
 
     //document.getElementById("contactEditResult").innerHTML = "";
 
-    let tmp = { 
-        FirstName: curContactFirstName, 
-        LastName: curContactLastName, 
-        Phone: curContactCellNumber, 
-        Email: curContactEmail, 
+    let tmp = {
+        FirstName: curContactFirstName,
+        LastName: curContactLastName,
+        Phone: curContactCellNumber,
+        Email: curContactEmail,
         UserID: userId,
         ContactID: curContactid,
         ConcatName: newConcatName
@@ -311,10 +311,10 @@ function deleteContact() //not completed; need to ensure a particular user ID an
     //document.getElementById("contactDeleteResult").innerHTML = "";
 
     let tmp = {
-        ContactID : ContactIDToDelete
+        ContactID: ContactIDToDelete
     };
 
-    let jsonPayload = JSON.stringify( tmp );
+    let jsonPayload = JSON.stringify(tmp);
 
     let url = urlBase + '/DeleteContact' + extension;
 
@@ -336,13 +336,11 @@ function deleteContact() //not completed; need to ensure a particular user ID an
 
 }
 
-function checkAddorEdit(){
+function checkAddorEdit() {
     // 1 means that in add or edit mode which enables the done button for that specific mode
     if (boolAdd == 1) {
         addContact();
-    }
-
-    else if(boolEdit == 1) {
+    } else if (boolEdit == 1) {
         editContact();
     }
 }
@@ -363,19 +361,19 @@ function cancelChanges() {
     boolAdd = 0;
 }
 
-function emailchecker(){
+function emailchecker() {
 
 }
 
-function phonechecker(){
+function phonechecker() {
 
 }
 
-function display(i){
+function display(i) {
     //this value i, is the ith element is results[i] used when selecting for delete, edit
     currContactID = i;
     document.getElementById("first-name").innerHTML = currentjson.results[i].LastName;
-    document.getElementById("last-name").innerHTML =  currentjson.results[i].FirstName;
+    document.getElementById("last-name").innerHTML = currentjson.results[i].FirstName;
     document.getElementById("Phonedisplay").innerHTML = currentjson.results[i].Phone;
     document.getElementById("Emaildisplay").innerHTML = currentjson.results[i].Email;
 
@@ -385,6 +383,7 @@ function display(i){
     document.getElementById("contactEmail").placeholder = currentjson.results[i].Email;
 
 }
+
 function toggleAdd() {
     document.getElementById("first-namep").style.display = 'block';
     document.getElementById("last-namep").style.display = 'block';
@@ -409,6 +408,11 @@ function toggleAdd() {
 function toggleAddOff() {
     document.getElementById("first-namep").style.display = 'none';
     document.getElementById("last-namep").style.display = 'none';
+
+    document.getElementById("contactFirstName").placeholder = "";
+    document.getElementById("contactLastName").placeholder = "";
+    document.getElementById("contactCellNumber").placeholder = "";
+    document.getElementById("contactEmail").placeholder = "";
 
     document.getElementById("contactFirstName").style.display = 'none'
     document.getElementById("contactLastName").style.display = 'none';
