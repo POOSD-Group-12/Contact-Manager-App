@@ -131,7 +131,6 @@ body
 .addButton:hover
 {
     background-color: rgba(255, 122, 45, 0.693);
-    color: #ffffff;
     opacity: 100%;
 }
 
@@ -147,7 +146,7 @@ body
 #SearchResult
 {
     position: relative;
-    margin-bottom: 15%;
+    /* margin-bottom: 15%; */
 }
 
 .contact-buttons
@@ -390,6 +389,5 @@ body
 .hidden{
     display: none;
 }
-
 
 
