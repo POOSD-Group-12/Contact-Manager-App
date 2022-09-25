@@ -10,6 +10,7 @@ let booldefaultSearch = true;
 let currentjson;
 let currContactID;
 let contactList;
+let isfetch = false;
 
 function doRegister() {
 
@@ -213,6 +214,7 @@ function searchContactWrapper(){
 function searchContact(page, saveList) //not completed; need to study and ensure understanding of how it works
 {
     //default
+    isfetch = true;
     let srch = "";
     //if (event.keyCode != 13 && booldefaultSearch === false) {
     //    booldefaultSearch = false;
@@ -270,6 +272,7 @@ function searchContact(page, saveList) //not completed; need to study and ensure
                 }
 
                 document.getElementById("SearchResult").innerHTML = contactList;
+                isfetch = false;
             }
         };
 
@@ -393,6 +396,7 @@ function editContactWrapper() {
 }
 
 function cancelChanges() {
+    
     document.getElementById("first-namep").style.display = 'none';
     document.getElementById("last-namep").style.display = 'none';
 
@@ -446,6 +450,8 @@ function display(i) {
 }
 
 function toggleAdd() {
+    DisplayInfo() 
+
     document.getElementById("first-namep").style.display = 'block';
     document.getElementById("last-namep").style.display = 'block';
 
@@ -482,31 +488,34 @@ function toggleAddOff() {
     document.getElementById("contactCellNumber").value = '';
     document.getElementById("contactEmail").value = '';
 
-    document.getElementById("first-name").style.display = 'block';
-    document.getElementById("last-name").style.display = 'block';
-    document.getElementById("Phonedisplay").style.display = 'block';
-    document.getElementById("Emaildisplay").style.display = 'block';
+    document.getElementById("first-name").style.display = '';
+    document.getElementById("last-name").style.display = '';
+    document.getElementById("Phonedisplay").style.display = '';
+    document.getElementById("Emaildisplay").style.display = '';
     document.getElementById("delete-modifier").style.display = 'block';
     document.getElementById("edit-modifier").style.display = 'block';
 
 }
 
-let scrollpage = 0;
 
-var el = document.getElementById("contact-list");
-if(el){
+let scrollpage = 1;
+
+var el = document.getElementById("scrolling-list");
     //infinite scroll function
     el.addEventListener("scroll", () => {
     // Do not run if currently fetching
-    //if (isFetching) return;
-    if(currentjson.Error == undefined){
-        scrollpage++;
+    if (isfetch == true) {
+      return;
     }
     
     // Scrolled to bottom
-    if (el.innerHeight + el.scrollY >= el.body.offsetHeight) {
+    setTimeout(4000);
+    if (el.scrollTop  + el.clientHeight  >= el.scrollHeight -5) {
+        if(currentjson.Error == undefined){
+        scrollpage++;
+        }
         searchContact(scrollpage, saveList = true);
+        console.log(scrollpage)
     }
     
   });
-}
