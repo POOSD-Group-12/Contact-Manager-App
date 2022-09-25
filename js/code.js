@@ -253,7 +253,6 @@ function searchContact(event) //not completed; need to study and ensure understa
     } catch (err) {
         document.getElementById("contactSearchResult").innerHTML = err.message;
     }
-    document.getElementById("searchText") = "";
 }
 
 function editContact() {
