@@ -201,6 +201,15 @@ body
     box-shadow: 1px 1px 2px 1px rgb(208, 207, 207);
 }
 
+#contact-container
+{
+    position: absolute;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 255, 255, 0);
+}
+
 #contact-header
 {
     display: inline-flex;
@@ -389,5 +398,6 @@ body
 .hidden{
     display: none;
 }
+
 
 

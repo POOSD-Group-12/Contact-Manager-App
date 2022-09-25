@@ -50,7 +50,7 @@
                     <!-- <option value="none" selected disabled hidden>Select an Option</option> -->
 
 
-                    <div id="SearchResult"></div>
+                    <div id="SearchResult" onclick="DisplayInfo()"></div>
 
                 </div>
 
@@ -71,73 +71,75 @@
 
             <div id="contact">
 
-                <div id="contact-header">
+                <div id="contact-container" style="visibility: hidden;">
 
-                    <div id="contact-picture"></div>
+                    <div id="contact-header">
 
-                    <div id="complete-name">
+                        <div id="contact-picture"></div>
 
-                        <p class = "hidden" id="first-namep">First: </p>
-                        <div id="first-name">First</div>
-                        <input id="contactFirstName" class="hidden" placeholder="first name"><br>
+                        <div id="complete-name">
 
-                        <p class = "hidden" id="last-namep">Last: </p>
-                        <div id="last-name">Last</div>
-                        <input id="contactLastName" class="hidden" placeholder="last name">
+                            <p class = "hidden" id="first-namep">First: </p>
+                            <div id="first-name">First</div>
+                            <input id="contactFirstName" class="hidden" placeholder="first name"><br>
 
-                    </div>
+                            <p class = "hidden" id="last-namep">Last: </p>
+                            <div id="last-name">Last</div>
+                            <input id="contactLastName" class="hidden" placeholder="last name">
 
-                </div>
-
-                 <!--only input or span can be displayed once, they need to be swapped depending on add or display, show both on edit-->
-                <!-- Contact info -->
-                <div id="contact-info">
-
-                    <div id="info1">
-
-                        <div id="Phone">
-                            <label>Phone:</label>
-                            <input id="contactCellNumber" class="hidden" placeholder="phone number" onkeypress="">
-                            <span id="Phonedisplay">(123)-456-7890</span>
                         </div>
 
-                        <div id="line1"></div>
                     </div>
 
-                    <div id="info2">
+                    <!--only input or span can be displayed once, they need to be swapped depending on add or display, show both on edit-->
+                    <!-- Contact info -->
+                    <div id="contact-info">
 
-                        <div id="email">
-                            <label>Email:</label>
-                            <input id="contactEmail" class="hidden" placeholder="email" type="email" onkeypress="">
-                            <span id="Emaildisplay">firstlast@icloud.com</span>
+                        <div id="info1">
+
+                            <div id="Phone">
+                                <label>Phone:</label>
+                                <input id="contactCellNumber" class="hidden" placeholder="phone number" onkeypress="">
+                                <span id="Phonedisplay">(123)-456-7890</span>
+                            </div>
+
+                            <div id="line1"></div>
                         </div>
 
-                        <div id="line2"></div>
+                        <div id="info2">
+
+                            <div id="email">
+                                <label>Email:</label>
+                                <input id="contactEmail" class="hidden" placeholder="email" type="email" onkeypress="">
+                                <span id="Emaildisplay">firstlast@icloud.com</span>
+                            </div>
+
+                            <div id="line2"></div>
+
+                        </div>
 
                     </div>
 
-                </div>
+                    <!--query first contact when nothing else is selected or add a contact if there is none-->
+                    <div id="mod-buttons">
 
-                <!--query first contact when nothing else is selected or add a contact if there is none-->
-                <div id="mod-buttons">
+                        <button type="button" id="delete-modifier" class="buttons" onclick="deleteContact();">Delete</button><br />
+                        <span id="contactDeleteResult"></span>
 
-                    <button type="button" id="delete-modifier" class="buttons" onclick="deleteContact();">Delete</button><br />
-                    <span id="contactDeleteResult"></span>
+                        <!-- <div id="edit-buttons"> -->
 
-                    <!-- <div id="edit-buttons"> -->
+                            <button type="cancel-button" id="cancel-modifier" class="cancel-button" onclick="cancelChanges();">Cancel</button><br />
+                            <span id="cancelChangesResult"></span>
 
-                        <button type="cancel-button" id="cancel-modifier" class="cancel-button" onclick="cancelChanges();">Cancel</button><br />
+                            <button type="button" id="edit-modifier" class="buttons" onclick="editContactWrapper();">Edit</button><br />
+                            <span id="contactWrapperResult"></span>
 
-                        <span id="cancelChangesResult"></span>
+                        <!-- </div> -->
 
-                        <button type="button" id="edit-modifier" class="buttons" onclick="editContactWrapper();">Edit</button><br />
-                        <span id="contactWrapperResult"></span>
+                        <button type="button" id="done" class="buttons" onclick="checkAddorEdit();">Save</button><br />
+                        <span id="contactAddorEditResult"></span>
 
-                    <!-- </div> -->
-
-                    <button type="button" id="done" class="buttons" onclick="checkAddorEdit();">Save</button><br />
-
-                    <span id="contactAddorEditResult"></span>
+                    </div>
 
                 </div>
 

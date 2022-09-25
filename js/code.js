@@ -149,6 +149,12 @@ function readCookie() {
 
 }
 
+function DisplayInfo() 
+{
+    var T = document.getElementById("contact-container");
+    T.style.visibility = "visible"; 
+}
+
 //done
 function addContact() {
 
@@ -227,12 +233,9 @@ function searchContact(event) //not completed; need to study and ensure understa
             if (this.readyState == 4 && this.status == 200) //how do the contents of this function work?
             {
                 let jsonObject = JSON.parse(xhr.responseText);
+                console.log(jsonObject.Error)
                 currentjson = jsonObject;
-                if(jsonObject.Error !== undefined){
-                    console.log(jsonObject.Error)
-                    document.getElementById("SearchResult").innerHTML = jsonObject.Error;
-                    return
-                }
+
                 for (let i = 0; i < jsonObject.results.length; i++) {
                     contactList += '<button class ="contact-buttons"';
                     contactList += 'onclick="display('
@@ -256,7 +259,7 @@ function searchContact(event) //not completed; need to study and ensure understa
 
         xhr.send(jsonPayload);
     } catch (err) {
-        document.getElementById("SearchResult").innerHTML = jsonObject.Error;
+        document.getElementById("contactSearchResult").innerHTML = err.message;
     }
 }
 
