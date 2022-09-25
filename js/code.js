@@ -223,11 +223,16 @@ function searchContact(event) //not completed; need to study and ensure understa
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
         xhr.onreadystatechange = function() {
+    
             if (this.readyState == 4 && this.status == 200) //how do the contents of this function work?
             {
                 let jsonObject = JSON.parse(xhr.responseText);
-                console.log(jsonObject)
                 currentjson = jsonObject;
+                if(jsonObject.Error !== undefined){
+                    console.log(jsonObject.Error)
+                    document.getElementById("SearchResult").innerHTML = jsonObject.Error;
+                    return
+                }
                 for (let i = 0; i < jsonObject.results.length; i++) {
                     contactList += '<button class ="contact-buttons"';
                     contactList += 'onclick="display('
@@ -251,7 +256,7 @@ function searchContact(event) //not completed; need to study and ensure understa
 
         xhr.send(jsonPayload);
     } catch (err) {
-        document.getElementById("contactSearchResult").innerHTML = err.message;
+        document.getElementById("SearchResult").innerHTML = jsonObject.Error;
     }
 }
 
@@ -315,7 +320,6 @@ function deleteContact() //not completed; need to ensure a particular user ID an
     let ContactIDToDelete = currentjson.results[currContactID].ContactID;
 
     //create modal asking are you sure
-    alert("you are about to delete");
     //document.getElementById("contactDeleteResult").innerHTML = "";
 
     let tmp = {
