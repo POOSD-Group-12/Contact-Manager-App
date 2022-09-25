@@ -102,7 +102,6 @@ body
     right: 5%;
     width: auto;
     height: 5%;
-    background-color: rgba(0, 217, 255, 0);
 }
 
 #searchText
@@ -135,6 +134,62 @@ body
     background-color: rgba(255, 122, 45, 0.693);
     color: #ffffff;
     opacity: 100%;
+}
+
+.contact-list
+{
+    display: inline-flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    right: 10%;
+    bottom: 5%;
+    width: auto;
+    background-color: rgba(255, 0, 102, 0.176);
+}
+
+#SearchResult
+{
+    display: inline-flexbox;
+    justify-content: space-between;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+}
+
+.contact-buttons
+{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: solid rgb(0, 0, 0);
+    text-align: left;
+    border-width: 0.5px;
+
+    /* position: absolute;
+    right: 0%;
+    left: 0%; */
+    
+width: 430%;
+    /* padding-top: 15%; */
+    padding-bottom: 10%;
+    margin-top: 10%; 
+    position: relative;
+    
+    background-color: aqua;
+}
+
+.contact-selectors
+{
+    background-color: aqua;
+    /* left: 0%;
+    right: 0%; */
+    
+    /* position: absolute; */
+    
+    color: rgb(0, 0, 0);
 }
 
 #separator
@@ -195,7 +250,7 @@ body
 
 #last-name
 {
-    padding-left: 10%;
+    padding-left: 7%;
     /* display: inline-block; */
 }
 
@@ -226,7 +281,7 @@ body
     border-width: 0px 0px 1px 0px;
 }
 
-#contact-buttons 
+#mod-buttons 
 {
     bottom: 0%;
     left: 0%;
@@ -345,4 +400,6 @@ body
 .hidden{
     display: none;
 }
+
+
 

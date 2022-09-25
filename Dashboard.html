@@ -40,9 +40,18 @@
 
                     <input type="image" class="addButton" id="addContact" onclick="addContactWrapper();" src="/images/addSymbol.png" alt="Add">
                     <br>
+                    <!-- <span id="SearchResult"></span> -->
+
+                </div>
+
+                <div class="contact-list">
+
                     <span id="SearchResult"></span>
 
                 </div>
+
+            </div>
+
 
                  <!-- create a modal for this-->
                 <!-- <section id="display-contacts">
@@ -66,8 +75,6 @@
                     </div>
 
                 </section> -->
-
-            </div>
 
             <div id="separator"></div>
 
@@ -100,11 +107,10 @@
                         <div id="Phone">
                             <label>Phone:</label>
                             <input id="contactCellNumber" class="hidden" placeholder="phone number" onkeypress="">
-                            <span id="Phonedisplay">(123)456-7890</span>
+                            <span id="Phonedisplay">(123)-456-7890</span>
                         </div>
 
                         <div id="line1"></div>
-
                     </div>
 
                     <div id="info2">
@@ -122,23 +128,23 @@
                 </div>
 
                 <!--query first contact when nothing else is selected or add a contact if there is none-->
-                <div id="contact-buttons">
+                <div id="mod-buttons">
 
                     <button type="button" id="delete-modifier" class="buttons" onclick="deleteContact();">Delete</button><br />
-                    <span id="colorAddResult"></span>
+                    <span id="contactDeleteResult"></span>
 
                     <!-- <div id="edit-buttons"> -->
 
                         <button type="cancel-button" id="cancel-modifier" class="cancel-button" onclick="cancelChanges();">Cancel</button><br />
-                        <span id="colorAddResult"></span>
+                        <span id="cancelChangesResult"></span>
 
                         <button type="button" id="edit-modifier" class="buttons" onclick="editContactWrapper();">Edit</button><br />
-                        <span id="colorAddResult"></span>
+                        <span id="contactWrapperResult"></span>
 
                     <!-- </div> -->
 
                     <button type="button" id="done" class="buttons" onclick="checkAddorEdit();">Save</button><br />
-                    <span id="colorAddResult"></span>
+                    <span id="contactAddorEditResult"></span>
 
                 </div>
 
