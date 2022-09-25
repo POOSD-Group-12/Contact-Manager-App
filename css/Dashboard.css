@@ -167,7 +167,7 @@ body
     background-color: rgba(255, 122, 45, 0.2);
 }
 
-.contact-buttons:active
+.contact-buttons:focus
 {
     border: solid #000;
     border-radius: 2px;
