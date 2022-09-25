@@ -183,6 +183,8 @@ function addContact() {
                 let jsonObject = JSON.parse(xhr.responseText);
                 //document.getElementById("contactAddResult").innerHTML = jsonObject.Status;
                 //use the modal to show that error or if it was successful
+                searchContact()
+   
             }
         };
 
@@ -233,9 +235,9 @@ function searchContact(event) //not completed; need to study and ensure understa
                     contactList += ');">'
                     contactList += '<span class ="contact-selectors">'
                         // IDK WHY BUT FIRST AND LAST NAME ARE SWAPPED
-                    contactList += jsonObject.results[i].LastName;
-                    contactList += "    "
                     contactList += jsonObject.results[i].FirstName;
+                    contactList += "    "
+                    contactList += jsonObject.results[i].LastName;
                     contactList += '</span>'
                     contactList += '</button>'
                     if (i < jsonObject.results.length - 1) {
@@ -286,9 +288,16 @@ function editContact() {
     try {
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                //need to change the contact information
-                //document.getElementById("contactEditResult").innerHTML = "Contact has been changed";
-                alert("Contact has been changedContact has been changed")
+                document.getElementById("first-name").innerHTML = curContactFirstName;
+                document.getElementById("last-name").innerHTML = curContactLastName;
+                document.getElementById("Phonedisplay").innerHTML = curContactCellNumber;
+                document.getElementById("Emaildisplay").innerHTML = curContactEmail;
+            
+                document.getElementById("contactFirstName").value = curContactFirstName;
+                document.getElementById("contactLastName").value = curContactLastName;
+                document.getElementById("contactCellNumber").value = curContactCellNumber;
+                document.getElementById("contactEmail").value = curContactEmail;
+                searchContact();
             }
         };
 
@@ -324,8 +333,13 @@ function deleteContact() //not completed; need to ensure a particular user ID an
     try {
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                //should check if the contact still exists
-                alert("contact deleted!")
+                //should check if the contact still exists         
+                searchContact(); 
+  
+                document.getElementById("first-name").innerHTML = 'First';
+                document.getElementById("last-name").innerHTML = 'Last';
+                document.getElementById("Phonedisplay").innerHTML = '(123)-456-7890';
+                document.getElementById("Emaildisplay").innerHTML= 'firstlast@icloud.com';
             }
         };
 
@@ -333,7 +347,6 @@ function deleteContact() //not completed; need to ensure a particular user ID an
     } catch (err) {
         //document.getElementById("contactDeletedResult").innerHTML = err.message;
     }
-
 }
 
 function checkAddorEdit() {
@@ -347,16 +360,37 @@ function checkAddorEdit() {
 
 function addContactWrapper() {
     boolAdd = 1;
+    document.getElementById("contactFirstName").value = ''
+    document.getElementById("contactLastName").value = '';
+    document.getElementById("contactCellNumber").value = '';
+    document.getElementById("contactEmail").value = '';
     toggleAdd();
 }
 
 function editContactWrapper() {
     boolEdit = 1;
+    display(currContactID);
     toggleAdd();
 }
 
 function cancelChanges() {
-    toggleAddOff()
+    document.getElementById("first-namep").style.display = 'none';
+    document.getElementById("last-namep").style.display = 'none';
+
+    document.getElementById("contactFirstName").style.display = 'none'
+    document.getElementById("contactLastName").style.display = 'none';
+    document.getElementById("contactCellNumber").style.display = 'none';
+    document.getElementById("contactEmail").style.display = 'none';
+    document.getElementById("done").style.display = 'none';
+    document.getElementById("cancel-modifier").style.display = 'none';
+
+    document.getElementById("first-name").style.display = 'block';
+    document.getElementById("last-name").style.display = 'block';
+    document.getElementById("Phonedisplay").style.display = 'block';
+    document.getElementById("Emaildisplay").style.display = 'block';
+    document.getElementById("delete-modifier").style.display = 'block';
+    document.getElementById("edit-modifier").style.display = 'block';
+
     boolEdit = 0;
     boolAdd = 0;
 }
@@ -372,15 +406,15 @@ function phonechecker() {
 function display(i) {
     //this value i, is the ith element is results[i] used when selecting for delete, edit
     currContactID = i;
-    document.getElementById("first-name").innerHTML = currentjson.results[i].LastName;
-    document.getElementById("last-name").innerHTML = currentjson.results[i].FirstName;
+    document.getElementById("first-name").innerHTML = currentjson.results[i].FirstName;
+    document.getElementById("last-name").innerHTML = currentjson.results[i].LastName;
     document.getElementById("Phonedisplay").innerHTML = currentjson.results[i].Phone;
     document.getElementById("Emaildisplay").innerHTML = currentjson.results[i].Email;
 
-    document.getElementById("contactFirstName").placeholder = currentjson.results[i].LastName;
-    document.getElementById("contactLastName").placeholder = currentjson.results[i].FirstName;
-    document.getElementById("contactCellNumber").placeholder = currentjson.results[i].Phone;
-    document.getElementById("contactEmail").placeholder = currentjson.results[i].Email;
+    document.getElementById("contactFirstName").value = currentjson.results[i].LastName;
+    document.getElementById("contactLastName").value = currentjson.results[i].FirstName;
+    document.getElementById("contactCellNumber").value = currentjson.results[i].Phone;
+    document.getElementById("contactEmail").value = currentjson.results[i].Email;
 
 }
 
@@ -408,11 +442,6 @@ function toggleAdd() {
 function toggleAddOff() {
     document.getElementById("first-namep").style.display = 'none';
     document.getElementById("last-namep").style.display = 'none';
-
-    document.getElementById("contactFirstName").placeholder = "";
-    document.getElementById("contactLastName").placeholder = "";
-    document.getElementById("contactCellNumber").placeholder = "";
-    document.getElementById("contactEmail").placeholder = "";
 
     document.getElementById("contactFirstName").style.display = 'none'
     document.getElementById("contactLastName").style.display = 'none';
