@@ -19,7 +19,7 @@
 	{
       //insert new contact 
       $stmt = $conn->prepare("INSERT into ContactsTestv2 (LastName,FirstName,ConcatName,Phone,Email,UserID) VALUES(?,?,?,?,?,?)");
-		  $stmt->bind_param("ssssss", $FirstName, $LastName, $ConcatName, $Phone, $Email, $UserID);
+		  $stmt->bind_param("ssssss", $LastName, $FirstName, $ConcatName, $Phone, $Email, $UserID);
 		  $stmt->execute();
 		  $stmt->close();
 		  $conn->close();
