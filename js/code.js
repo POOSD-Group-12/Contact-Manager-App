@@ -7,10 +7,12 @@ let lastName = "";
 let boolAdd = 0;
 let boolEdit = 0;
 let booldefaultSearch = true;
-let currentjson;
+let contactArray = [];
+let isLastPage;
 let currContactID;
 let contactList;
 let isfetch = false;
+let scrollpage = 1;
 
 function doRegister() {
 
@@ -105,7 +107,6 @@ function doLogin() {
         xhr.send(jsonPayload);
     } catch (err) {
         document.getElementById("loginResult").innerHTML = err.message;
-        console.log(2)
     }
 
 }
@@ -206,9 +207,13 @@ function addContact() {
 }
 
 function searchContactWrapper(){
-    let page = 1; //default
+    //let page = 1; //default
     let saveList = false;
-    searchContact(page, saveList);
+
+    for (i = 1; i <= scrollpage; i++){
+        searchContact(i, saveList);
+
+    }
 }
 
 function searchContact(page, saveList) //not completed; need to study and ensure understanding of how it works
@@ -244,20 +249,22 @@ function searchContact(page, saveList) //not completed; need to study and ensure
             if (this.readyState == 4 && this.status == 200) //how do the contents of this function work?
             {
                 let jsonObject = JSON.parse(xhr.responseText);
-                console.log(jsonObject)
-
-                if(jsonObject.Error !== undefined && saveList == false){
-                    console.log(jsonObject.Error)
-                    document.getElementById("SearchResult").innerHTML = jsonObject.Error;
-                    return
+                //console.log(contactArray);
+                if(jsonObject.Error){
+                    isLastPage = true;
                 }
-                jsonObject.results.sort((a, b) => a.FirstName.localeCompare(b.FirstName))
-                currentjson = jsonObject;
+                else {
+                    isLastPage = false;
+                }
+                console.log("islast " + isLastPage)
 
-                for (let i = 0; i < jsonObject.results.length; i++) {
+                // the ? checks if it is null/undef
+                for (let i = 0; i < jsonObject.results?.length; i++) {
+                    contactArray.push(jsonObject.results[i]);
+
                     contactList += '<button class ="contact-buttons"';
                     contactList += 'onclick="display('
-                    contactList += i;
+                    contactList += contactArray.length - 1;
                     contactList += ');">'
                     contactList += '<span class ="contact-selectors">'
                         // IDK WHY BUT FIRST AND LAST NAME ARE SWAPPED
@@ -290,7 +297,7 @@ function editContact() {
     let curContactEmail = document.getElementById("contactEmail").value;
     let newConcatName = curContactFirstName + " " + curContactLastName;
 
-    let curContactid = currentjson.results[currContactID].ContactID; //will need to take the current user ID for the contact that's being edited
+    let curContactid = contactArray[currContactID].ContactID; //will need to take the current user ID for the contact that's being edited
 
     //document.getElementById("contactEditResult").innerHTML = "";
 
@@ -339,7 +346,7 @@ function editContact() {
 function deleteContact() //not completed; need to ensure a particular user ID and its content are deleted from a contact list
 {
 
-    let ContactIDToDelete = currentjson.results[currContactID].ContactID;
+    let ContactIDToDelete = contactArray[currContactID].ContactID;
 
     //create modal asking are you sure
     //document.getElementById("contactDeleteResult").innerHTML = "";
@@ -435,16 +442,16 @@ function DisplayInfo()
 function display(i) {
     //this value i, is the ith element is results[i] used when selecting for delete, edit
     currContactID = i;
-    document.getElementById("first-name").innerHTML = currentjson.results[i].FirstName;
-    document.getElementById("last-name").innerHTML = currentjson.results[i].LastName;
-    document.getElementById("Phonedisplay").innerHTML = currentjson.results[i].Phone;
-    document.getElementById("Emaildisplay").innerHTML = currentjson.results[i].Email;
+    document.getElementById("first-name").innerHTML = contactArray[i].FirstName;
+    document.getElementById("last-name").innerHTML = contactArray[i].LastName;
+    document.getElementById("Phonedisplay").innerHTML = contactArray[i].Phone;
+    document.getElementById("Emaildisplay").innerHTML = contactArray[i].Email;
 
-    document.getElementById("contactFirstName").value = currentjson.results[i].LastName;
-    document.getElementById("contactLastName").value = currentjson.results[i].FirstName;
-    document.getElementById("contactCellNumber").value = currentjson.results[i].Phone;
-    document.getElementById("contactEmail").value = currentjson.results[i].Email;
-    document.getElementById("contactEmail").value = currentjson.results[i].Email;
+    document.getElementById("contactFirstName").value = contactArray[i].LastName;
+    document.getElementById("contactLastName").value = contactArray[i].FirstName;
+    document.getElementById("contactCellNumber").value = contactArray[i].Phone;
+    document.getElementById("contactEmail").value = contactArray[i].Email;
+    document.getElementById("contactEmail").value = contactArray[i].Email;
     DisplayInfo();
 
 }
@@ -497,25 +504,23 @@ function toggleAddOff() {
 
 }
 
-
-let scrollpage = 1;
-
 var el = document.getElementById("scrolling-list");
     //infinite scroll function
     el.addEventListener("scroll", () => {
+        
     // Do not run if currently fetching
     if (isfetch == true) {
       return;
     }
-    
+    //scrollpage = Math.trunc(scrollpage)
     // Scrolled to bottom
     setTimeout(4000);
-    if (el.scrollTop  + el.clientHeight  >= el.scrollHeight -5) {
-        if(currentjson.Error == undefined){
-        scrollpage++;
+    if (el.scrollTop  + el.clientHeight  >= el.scrollHeight -5 ) { 
+        if(!isLastPage){
+            scrollpage++;
+            searchContact(scrollpage, saveList = true);
+            console.log(scrollpage)
         }
-        searchContact(scrollpage, saveList = true);
-        console.log(scrollpage)
     }
     
   });
