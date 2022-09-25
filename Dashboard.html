@@ -2,6 +2,8 @@
 <html>
 
 <head>
+    <title>NETBOOK</title>
+    
     <script type="text/javascript" src="js/code.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/Dashboard.css" rel="stylesheet">
@@ -18,7 +20,7 @@
 
 <header>
 
-    <h1 id="title">CONTACT MANAGER</h1>
+    <h1 id="title">NETBOOK</h1>
     
     <nav>
         <li id="welcome"><i>Welcome, <span id="userName"> name</span></i></li>
@@ -125,20 +127,20 @@
                 <div id="contact-buttons">
 
                     <button type="button" id="delete-modifier" class="buttons" onclick="deleteContact();">Delete</button><br />
-                    <span id="colorAddResult"></span>
+                    <span id="contactDeleteResult"></span>
 
                     <!-- <div id="edit-buttons"> -->
 
                         <button type="cancel-button" id="cancel-modifier" class="cancel-button" onclick="cancelChanges();">Cancel</button><br />
-                        <span id="colorAddResult"></span>
+                        <span id="cancelResult"></span>
 
                         <button type="button" id="edit-modifier" class="buttons" onclick="editContactWrapper();">Edit</button><br />
-                        <span id="colorAddResult"></span>
+                        <span id="editWrapperResult"></span>
 
                     <!-- </div> -->
 
                     <button type="button" id="done" class="buttons" onclick="checkAddorEdit();">Save</button><br />
-                    <span id="colorAddResult"></span>
+                    <span id="saveResult"></span>
 
                 </div>
 
