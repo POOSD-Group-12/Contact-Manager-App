@@ -9,6 +9,7 @@ let boolEdit = 0;
 let booldefaultSearch = true;
 let currentjson;
 let currContactID;
+let contactList;
 
 function doRegister() {
 
@@ -189,7 +190,7 @@ function addContact() {
                 let jsonObject = JSON.parse(xhr.responseText);
                 //document.getElementById("contactAddResult").innerHTML = jsonObject.Status;
                 //use the modal to show that error or if it was successful
-                searchContact()
+                searchContactWrapper()
    
             }
         };
@@ -203,7 +204,13 @@ function addContact() {
     boolAdd = 0;
 }
 
-function searchContact(event) //not completed; need to study and ensure understanding of how it works
+function searchContactWrapper(){
+    let page = 1; //default
+    let saveList = false;
+    searchContact(page, saveList);
+}
+
+function searchContact(page, saveList) //not completed; need to study and ensure understanding of how it works
 {
     //default
     let srch = "";
@@ -213,12 +220,14 @@ function searchContact(event) //not completed; need to study and ensure understa
     //}
     srch = document.getElementById("searchText").value;
 
-    let contactList = "";
+    if(saveList == false){
+        contactList = "";
+    }
 
     let tmp = {
         UserID: userId,
         Search: srch,
-        Page: "1"
+        Page: page
     };
     let jsonPayload = JSON.stringify(tmp);
 
@@ -233,7 +242,14 @@ function searchContact(event) //not completed; need to study and ensure understa
             if (this.readyState == 4 && this.status == 200) //how do the contents of this function work?
             {
                 let jsonObject = JSON.parse(xhr.responseText);
-                console.log(jsonObject.Error)
+                console.log(jsonObject)
+
+                if(jsonObject.Error !== undefined && saveList == false){
+                    console.log(jsonObject.Error)
+                    document.getElementById("SearchResult").innerHTML = jsonObject.Error;
+                    return
+                }
+                jsonObject.results.sort((a, b) => a.FirstName.localeCompare(b.FirstName))
                 currentjson = jsonObject;
 
                 for (let i = 0; i < jsonObject.results.length; i++) {
@@ -259,7 +275,7 @@ function searchContact(event) //not completed; need to study and ensure understa
 
         xhr.send(jsonPayload);
     } catch (err) {
-        document.getElementById("contactSearchResult").innerHTML = err.message;
+        document.getElementById("SearchResult").innerHTML = jsonObject.Error;
     }
 }
 
@@ -304,7 +320,7 @@ function editContact() {
                 document.getElementById("contactLastName").value = curContactLastName;
                 document.getElementById("contactCellNumber").value = curContactCellNumber;
                 document.getElementById("contactEmail").value = curContactEmail;
-                searchContact();
+                searchContactWrapper();
             }
         };
 
@@ -340,12 +356,9 @@ function deleteContact() //not completed; need to ensure a particular user ID an
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 //should check if the contact still exists         
-                searchContact(); 
-  
-                document.getElementById("first-name").innerHTML = 'First';
-                document.getElementById("last-name").innerHTML = 'Last';
-                document.getElementById("Phonedisplay").innerHTML = '(123)-456-7890';
-                document.getElementById("Emaildisplay").innerHTML= 'firstlast@icloud.com';
+                searchContactWrapper(); 
+                
+                document.getElementById("contact-container").style.visibility = "hidden";
             }
         };
 
@@ -409,6 +422,12 @@ function phonechecker() {
 
 }
 
+function DisplayInfo() 
+{
+    var T = document.getElementById("contact-container");
+    T.style.visibility = "visible"; 
+}
+
 function display(i) {
     //this value i, is the ith element is results[i] used when selecting for delete, edit
     currContactID = i;
@@ -421,6 +440,8 @@ function display(i) {
     document.getElementById("contactLastName").value = currentjson.results[i].FirstName;
     document.getElementById("contactCellNumber").value = currentjson.results[i].Phone;
     document.getElementById("contactEmail").value = currentjson.results[i].Email;
+    document.getElementById("contactEmail").value = currentjson.results[i].Email;
+    DisplayInfo();
 
 }
 
@@ -468,4 +489,24 @@ function toggleAddOff() {
     document.getElementById("delete-modifier").style.display = 'block';
     document.getElementById("edit-modifier").style.display = 'block';
 
+}
+
+let scrollpage = 0;
+
+var el = document.getElementById("contact-list");
+if(el){
+    //infinite scroll function
+    el.addEventListener("scroll", () => {
+    // Do not run if currently fetching
+    //if (isFetching) return;
+    if(currentjson.Error == undefined){
+        scrollpage++;
+    }
+    
+    // Scrolled to bottom
+    if (el.innerHeight + el.scrollY >= el.body.offsetHeight) {
+        searchContact(scrollpage, saveList = true);
+    }
+    
+  });
 }

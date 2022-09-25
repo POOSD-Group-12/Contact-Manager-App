@@ -11,7 +11,7 @@
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
             readCookie();
-            searchContact();
+            searchContactWrapper();
         }, false);
     </script>
 
@@ -37,7 +37,7 @@
 
                 <div class="accessUIDiv">
                     <br>
-                    <input type="text" id="searchText" placeholder="Search" onkeypress="searchContact(event);">
+                    <input type="text" id="searchText" placeholder="Search" onkeypress="searchContactWrapper();">
 
                     <input type="image" class="addButton" id="addContact" onclick="addContactWrapper();" src="/images/addSymbol.png" alt="Add">
                     <br>
