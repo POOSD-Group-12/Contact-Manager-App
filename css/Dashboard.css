@@ -140,8 +140,9 @@ body
     top: 15%;
     left: 10%;
     right: 10%;
-    bottom: 5%;
-    overflow:scroll
+    bottom: 30%;
+    overflow-y:auto;
+    overflow-x:hidden;
 }
 
 #SearchResult
