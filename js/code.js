@@ -253,7 +253,7 @@ function searchContact(page, saveList)
                 else {
                     isLastPage = false;
                 }
-                console.log("islast " + isLastPage)
+                //console.log(userId)
 
                 // the ? checks if it is null/undef
                 for (let i = 0; i < jsonObject.results?.length; i++) {
@@ -286,6 +286,7 @@ function searchContact(page, saveList)
     }
 }
 
+
 function editContact() {
 
     let curContactFirstName = document.getElementById("contactFirstName").value;
@@ -294,7 +295,7 @@ function editContact() {
     let curContactEmail = document.getElementById("contactEmail").value;
     let newConcatName = curContactFirstName + " " + curContactLastName;
 
-    let curContactid = contactArray[currContactID].ContactID; 
+    let curContactid = contactArray[currContactID].ContactID; //will need to take the current user ID for the contact that's being edited
 
     //document.getElementById("contactEditResult").innerHTML = "";
 
@@ -308,9 +309,15 @@ function editContact() {
         ConcatName: newConcatName
     };
 
+    //document.getElementById("contactFirstName").value = '';
+    //document.getElementById("contactLastName").value = '';
+    //document.getElementById("contactCellNumber").value = '';
+    //document.getElementById("contactEmail").value = '';
+    
     let jsonPayload = JSON.stringify(tmp);
 
     let url = urlBase + '/EditContact' + extension;
+
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
@@ -327,7 +334,10 @@ function editContact() {
                 document.getElementById("contactLastName").value = curContactLastName;
                 document.getElementById("contactCellNumber").value = curContactCellNumber;
                 document.getElementById("contactEmail").value = curContactEmail;
+                contactArray = [];
                 searchContactWrapper();
+                console.log(contactArray)
+
             }
         };
 
@@ -366,7 +376,7 @@ function deleteContact()
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
         xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {    
+            if (this.readyState == 4 && this.status == 200) {        
                 searchContactWrapper(); 
                 
                 document.getElementById("contact-container").style.visibility = "hidden";
@@ -399,11 +409,19 @@ function addContactWrapper() {
 
 function editContactWrapper() {
     boolEdit = 1;
+    //this is a race condition
+    searchContactWrapper();
+    setTimeout(100);
     display(currContactID);
     toggleAdd();
 }
 
 function cancelChanges() {
+    
+    document.getElementById("contactFirstName").value = ''
+    document.getElementById("contactLastName").value = '';
+    document.getElementById("contactCellNumber").value = '';
+    document.getElementById("contactEmail").value = '';
     
     document.getElementById("first-namep").style.display = 'none';
     document.getElementById("last-namep").style.display = 'none';
@@ -443,13 +461,14 @@ function DisplayInfo()
 function display(i) {
     //this value i, is the ith element is results[i] used when selecting for delete, edit
     currContactID = i;
+    console.log(contactArray)
     document.getElementById("first-name").innerHTML = contactArray[i].FirstName;
     document.getElementById("last-name").innerHTML = contactArray[i].LastName;
     document.getElementById("Phonedisplay").innerHTML = contactArray[i].Phone;
     document.getElementById("Emaildisplay").innerHTML = contactArray[i].Email;
 
-    document.getElementById("contactFirstName").value = contactArray[i].LastName;
-    document.getElementById("contactLastName").value = contactArray[i].FirstName;
+    document.getElementById("contactFirstName").value = contactArray[i].FirstName;
+    document.getElementById("contactLastName").value = contactArray[i].LastName;
     document.getElementById("contactCellNumber").value = contactArray[i].Phone;
     document.getElementById("contactEmail").value = contactArray[i].Email;
     document.getElementById("contactEmail").value = contactArray[i].Email;
@@ -491,10 +510,10 @@ function toggleAddOff() {
     document.getElementById("done").style.display = 'none';
     document.getElementById("cancel-modifier").style.display = 'none';
 
-    document.getElementById("contactFirstName").value = ''
-    document.getElementById("contactLastName").value = '';
-    document.getElementById("contactCellNumber").value = '';
-    document.getElementById("contactEmail").value = '';
+    //document.getElementById("contactFirstName").value = ''
+    //document.getElementById("contactLastName").value = '';
+    //document.getElementById("contactCellNumber").value = '';
+    //document.getElementById("contactEmail").value = '';
 
     document.getElementById("first-name").style.display = '';
     document.getElementById("last-name").style.display = '';
