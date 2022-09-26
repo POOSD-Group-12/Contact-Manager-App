@@ -329,6 +329,7 @@ function editContact() {
                 document.getElementById("last-name").innerHTML = curContactLastName;
                 document.getElementById("Phonedisplay").innerHTML = curContactCellNumber;
                 document.getElementById("Emaildisplay").innerHTML = curContactEmail;
+                document.getElementById("initials").innerHTML = curContactFirstName[0] + curContactLastName[0];
             
                 document.getElementById("contactFirstName").value = curContactFirstName;
                 document.getElementById("contactLastName").value = curContactLastName;
@@ -462,6 +463,8 @@ function display(i) {
     //this value i, is the ith element is results[i] used when selecting for delete, edit
     currContactID = i;
     console.log(contactArray)
+    document.getElementById("initials").innerHTML = contactArray[i].FirstName[0] + contactArray[i].LastName[0];
+
     document.getElementById("first-name").innerHTML = contactArray[i].FirstName;
     document.getElementById("last-name").innerHTML = contactArray[i].LastName;
     document.getElementById("Phonedisplay").innerHTML = contactArray[i].Phone;

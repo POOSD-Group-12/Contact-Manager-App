@@ -234,6 +234,21 @@ body
     background-color: rgba(185, 85, 29, 0.1);
     box-shadow: 0px 2px 2px 0px rgb(208, 207, 207);
     text-align: center;
+    /* display:inline-block; */
+
+}
+
+#initials
+{
+    color: rgb(255, 159, 104);
+    font-size: 50px;    
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    margin-top: 31%;
+    margin-left: 8%;
+    transform: scale(1.2, 1);
+    width: 150px;
+    height: 150px;
 }
 
 #complete-name
