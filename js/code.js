@@ -49,8 +49,6 @@ function doRegister() {
                     document.getElementById("registerResult").innerHTML = "Account successfully created";
                 }
 
-                //saveCookie(firstName, lastName, userId); //take user information and reroute them to dashboard
-
                 setTimeout(() => { window.location.href = "index.html"; }, 3000);
             }
         };
@@ -158,7 +156,6 @@ function DisplayInfo()
     T.style.visibility = "visible"; 
 }
 
-//done
 function addContact() {
 
     let newContactFirstName = document.getElementById("contactFirstName").value;
@@ -166,7 +163,7 @@ function addContact() {
     let newContactCellNumber = document.getElementById("contactCellNumber").value;
     let newContactEmail = document.getElementById("contactEmail").value;
     let newConcatName = newContactFirstName + " " + newContactLastName;
-    let newUserID = userId //will need to take the next available user ID available, then should hopefully be done
+    let newUserID = userId;
 
 
     //document.getElementById("contactAddResult").innerHTML = "";
@@ -216,7 +213,7 @@ function searchContactWrapper(){
     }
 }
 
-function searchContact(page, saveList) //not completed; need to study and ensure understanding of how it works
+function searchContact(page, saveList) 
 {
     //default
     isfetch = true;
@@ -246,7 +243,7 @@ function searchContact(page, saveList) //not completed; need to study and ensure
     try {
         xhr.onreadystatechange = function() {
     
-            if (this.readyState == 4 && this.status == 200) //how do the contents of this function work?
+            if (this.readyState == 4 && this.status == 200) 
             {
                 let jsonObject = JSON.parse(xhr.responseText);
                 //console.log(contactArray);
@@ -297,7 +294,7 @@ function editContact() {
     let curContactEmail = document.getElementById("contactEmail").value;
     let newConcatName = curContactFirstName + " " + curContactLastName;
 
-    let curContactid = contactArray[currContactID].ContactID; //will need to take the current user ID for the contact that's being edited
+    let curContactid = contactArray[currContactID].ContactID; 
 
     //document.getElementById("contactEditResult").innerHTML = "";
 
@@ -343,7 +340,7 @@ function editContact() {
     boolEdit = 0;
 }
 
-function deleteContact() //not completed; need to ensure a particular user ID and its content are deleted from a contact list
+function deleteContact() 
 {
 
     let ContactIDToDelete = contactArray[currContactID].ContactID;
