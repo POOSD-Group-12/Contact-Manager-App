@@ -342,7 +342,7 @@ function editContact() {
 
 function deleteContactWrapper()
 {
-    var result = confirm("Want to delete?");
+    var result = confirm("Want to delete this contact?");
     if (result) {
         deleteContact();
     }
