@@ -447,8 +447,8 @@ function display(i) {
     document.getElementById("Phonedisplay").innerHTML = contactArray[i].Phone;
     document.getElementById("Emaildisplay").innerHTML = contactArray[i].Email;
 
-    document.getElementById("contactFirstName").value = contactArray[i].LastName;
-    document.getElementById("contactLastName").value = contactArray[i].FirstName;
+    document.getElementById("contactFirstName").value = contactArray[i].FirstName;
+    document.getElementById("contactLastName").value = contactArray[i].LastName;
     document.getElementById("contactCellNumber").value = contactArray[i].Phone;
     document.getElementById("contactEmail").value = contactArray[i].Email;
     document.getElementById("contactEmail").value = contactArray[i].Email;
