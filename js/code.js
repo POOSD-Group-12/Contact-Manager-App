@@ -340,13 +340,18 @@ function editContact() {
     boolEdit = 0;
 }
 
+function deleteContactWrapper()
+{
+    var result = confirm("Want to delete?");
+    if (result) {
+        deleteContact();
+    }
+}
+
 function deleteContact() 
 {
 
     let ContactIDToDelete = contactArray[currContactID].ContactID;
-
-    //create modal asking are you sure
-    //document.getElementById("contactDeleteResult").innerHTML = "";
 
     let tmp = {
         ContactID: ContactIDToDelete
