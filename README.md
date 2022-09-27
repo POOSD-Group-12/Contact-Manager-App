@@ -15,7 +15,7 @@ small contact manager project using LAMP ,and:
 
 
 # DEMO
-![](2022-09-27 00-31-18.gif)
+<img src="2022-09-27 00-31-18.gif"/>
 
 # git guide
 folder location on the server is @ /var/www/html/ !!!!!
